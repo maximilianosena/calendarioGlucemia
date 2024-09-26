@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendario Glucemia</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body id="cuerpo">
+    <h1 style="text-align: center;">Historial de Mediciones</h1>
+   
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="index.html">INICIO</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"></li>
+                    <a class="nav-link" href="index.html">Registro Valores</a>
+                </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="historial.html">Historial Registros</a>
+                    </li>
+                  
+                    <li class="nav-item">
+                        <a class="nav-link" href="estadisticas.html">Estadisticas</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <button id="close" type="button" class="btn btn-outline-danger nav-link">Cerrar Sesión</button>
+                    </li>
+                </ul>
+            </div>
+        </div> 
+      </nav>
+      <hr>
+<div class="container">
+    <form id="anotacionInsulina" class="item">
+        <div class="mb-3">
+            <div class="input-group">
+                <span class="input-group-text">Unidades</span>
+               <input type="datetime" name="unidades" id="unidades" class="form-control" required>
+              </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="notNowInsulina">
+            <label class="form-check-label" for="notNowInsulina">
+                Es registrado fuera de hora/fecha?
+            </label>
+          </div> 
+        <div id="container_fecha"></div>
+    </div>
+    <div class="mb-3">
+        <label for="tipoInsulina">Tipo: </label>
+        <select class="form-select" name="momento" id="tipoInsulina" size="1" style="text-align: center;" required>
+            <option value="" style="display: none;"></option>
+            <option value="Insulina Basal" id="basal" name="Basal">Basal</option>
+            <option value="Insulina Rápida" id="rapida" name="Rápida" >Rápida</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="momentoInsulina">Momento del registro: </label>
+        <select class="form-select" name="momento" id="momentoInsulina" size="1" style="text-align: center;" required>
+            <option value="" style="display: none;"></option>
+            <option value="Pre"disabled style="font-weight: bold; background-color: rgb(163, 159, 159);" >Pre</option>
+            <option value="Pre Desayuno" id="predesayuno" name="Pre Desayuno">Desayuno</option>
+            <option value="Pre Almuerzo" id="prealmuerzo" name="Pre Almuerzo">Almuerzo</option>
+            <option value="Pre Merienda" id="premerienda" name="Pre Merienda">Merienda</option>
+            <option value="Pre Cena" id="precena" name="Pre Cena">Cena</option>
+            <option value="Pre" disabled style="font-weight: bold; background-color: rgb(163, 159, 159);">Post</option>
+            <option value="Post Desayuno" id="postdesayuno" name="Post Desayuno">Desayuno</option>
+            <option value="Post Almuerzo" id="postalmuerzo" name="Post Almuerzo">Almuerzo</option>
+            <option value="Post Merienda" id="postmerienda" name="Post Merienda">Merienda</option>
+            <option value="Post Cena" id="postcena" name="Post Cena" >Cena</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="notasInsu">Notas adicionales</label>
+        <textarea name="notas" class="form-control" id="notasInsu" rows="3"></textarea>
+    </div>
+        <button type="submit" id="submit" class="btn btn-primary" style="text-align: center;">Enviar</button>
+    </form>
+    
+   
+</div>
+    <script src="scripts/init.js"></script>
+    <script src="scripts/registroInsulina.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>    
+</body>
+</html>

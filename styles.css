@@ -1,0 +1,43 @@
+label {
+    display: block;
+    font:
+      1rem 'Fira Sans',
+      sans-serif;
+  }
+  
+  input,
+  label {
+    margin: 0.4rem 0;
+  }
+  
+  body#cuerpo{
+    background-color: rgb(21, 184, 162);
+  }
+
+  .container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 2fr 100px;
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+    justify-items: stretch;
+    align-items: stretch
+ }
+
+ a.nav-link:hover {
+  background-color: rgb(17, 115, 180);
+  border-radius: 8%;
+ }
+
+ .item#anotacion{
+  background-color: rgba(20, 170, 150, 0.507);
+ }
+
+ .item#tiempoRango, .item#ultimos5{
+  background-color: rgba(129, 230, 216, 0.507);
+ }
+
+ 
+ .item#grafica{
+  background-color: floralwhite;
+ }
