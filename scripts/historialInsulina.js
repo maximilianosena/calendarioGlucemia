@@ -4,7 +4,7 @@ let container_registros = document.getElementById("container_insulina")
 async function getValores() {
     try {
         let token = localStorage.getItem("token")
-        const response = await fetch(`http://localhost:3000/insulina`, {
+        const response = await fetch(`https://backend-glucemia.vercel.app/insulina`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -68,7 +68,7 @@ async function deleteRegistro(id) {
 
     try {
         let token = localStorage.getItem("token")
-        const response = await fetch(`http://localhost:3000/borrar_Insulina/${id}`, {
+        const response = await fetch(`https://backend-glucemia.vercel.app/borrar_Insulina/${id}`, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${token}`,

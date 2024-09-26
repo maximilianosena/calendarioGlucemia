@@ -150,7 +150,7 @@ button_submit.addEventListener("submit", async (e) => {
         console.log(nuevo_registro)
         try {
             let token = localStorage.getItem("token")
-            const response = await fetch('http://localhost:3000/nuevo_registro', {
+            const response = await fetch('https://backend-glucemia.vercel.app/nuevo_registro', {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -189,7 +189,7 @@ button_submit.addEventListener("submit", async (e) => {
 async function getValores() {
     try {
         let token = localStorage.getItem("token")
-        const response = await fetch(`http://localhost:3000/`, {
+        const response = await fetch(`https://backend-glucemia.vercel.app/`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`

@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function() {
         try { 
             
             // Hacer una solicitud POST usando fetch
-            const response = await fetch('http://localhost:3000/login', {
+            const response = await fetch('https://backend-glucemia.vercel.app/login', {
             method: 'POST',  // Tipo de solicitud
             headers: {
             'Content-Type': 'application/json', 
