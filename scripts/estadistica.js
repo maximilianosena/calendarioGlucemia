@@ -67,9 +67,9 @@ function promedioValores (dato){
     let normal =[]
     for (let i=0; i<dato.valor.length; i++){
         console.log(dato.valor[i])
-       if (dato.valor[i]>1.7){
+       if (dato.valor[i]>180){
         arriba.push(dato.valor[i])
-       } else if (dato.valor[i]<0.7){
+       } else if (dato.valor[i]<70){
         abajo.push(dato.valor[i])
        } else {
         normal.push(dato.valor[i])
