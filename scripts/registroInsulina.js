@@ -1,3 +1,19 @@
+window.addEventListener('load', function () {
+    sessionStorage.setItem('is_reloading', 'true');
+});
+
+window.addEventListener('beforeunload', function () {
+    if (sessionStorage.getItem('is_reloading')) {
+        // Si el indicador de recarga está presente, significa que la página se está recargando,
+        // así que no limpiamos el localStorage
+        sessionStorage.removeItem('is_reloading');
+    } else {
+        // Si no hay indicador, es un cierre de ventana, limpiamos localStorage
+        localStorage.clear();
+    }
+});
+
+
 ///////////MANEJO DE FECHAS/////////////////
 const checkbox_now = document.getElementById("notNowInsulina")
 let container = document.getElementById("container_fecha")
