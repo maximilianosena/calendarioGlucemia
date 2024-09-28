@@ -122,4 +122,13 @@ label {
 
 }
 
-/* Ensure padding and alignment for buttons */
+.toast-header {
+  background-color: rgb(250, 249, 247);
+  color: rgb(4, 255, 4);
+  border-style: none;
+}
+
+#miToast {
+  margin: 15px;
+  border-style: none;
+}

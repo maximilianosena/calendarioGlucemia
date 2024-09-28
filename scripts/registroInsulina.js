@@ -167,6 +167,7 @@ button_submit.addEventListener("submit", async (e) => {
             if (response.ok) {
                 const result = await response.json();
                 console.log('Respuesta del servidor:', result);
+                mostrarToast()
                 setTimeout(() => {
                     localStorage.removeItem("fecha")
                     localStorage.removeItem("fechaComparativaI")
@@ -179,7 +180,7 @@ button_submit.addEventListener("submit", async (e) => {
                     location.reload()
                 }, 1000)
             } else {
-                
+                    errorToast()
                     console.error('Error en la solicitud:', response.status, await response.text());
                 }
         
@@ -191,3 +192,14 @@ button_submit.addEventListener("submit", async (e) => {
 
 }
 )
+
+function mostrarToast() {
+    var miToast = document.getElementById('miToast');
+    var cartel = new bootstrap.Toast(miToast);
+    cartel.show();
+}
+function errorToast() {
+var miToast = document.getElementById('miNOToast');
+var cartel = new bootstrap.Toast(miToast);
+    cartel.show();
+}

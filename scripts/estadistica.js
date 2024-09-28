@@ -113,7 +113,8 @@ function promedio_En_Unidades(dato) {
         total += dato.valor[i]
     }
 
-    glu_promedio.innerHTML += `<h6>La Glucosa promedio es de ${total > 0 ? total : 0} (mg/dL)<h6> <br>`
+    let result = (total/dato.valor.length).toFixed(2)
+    glu_promedio.innerHTML += `<h6>La Glucosa promedio es de ${result > 0 ? result : 0} (mg/dL)<h6> <br>`
 }
 
 let hemoglobina_glicosilada = document.getElementById("glicosilada")
