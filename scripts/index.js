@@ -204,7 +204,6 @@ async function getValores() {
             const result = await response.json()
             console.log(result)
             tipo_grafica(result)
-            view_Last_Resultados(result)
         }
     }
     catch (e) {
