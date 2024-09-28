@@ -284,3 +284,30 @@ function tipo_grafica(mes){
         }
     });
     }
+
+
+    //////////////////////////////Eliminar Registros Antiguos////////////////////////////
+
+    async function eliminarRegistrosAntiguos() {
+        try {
+          const response = await fetch('/delete-old', {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          });
+      
+          if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message);
+          }
+      
+          const data = await response.json();
+          console.log(data.message); // Mensaje de éxito
+        } catch (error) {
+          console.error('Error al eliminar registros:', error.message);
+        }
+      }
+      
+      
+      eliminarRegistrosAntiguos();
