@@ -5,7 +5,8 @@ let container_registros = document.getElementById("container_insulina")
 async function getValores() {
     try {
         let token = localStorage.getItem("token")
-        const response = await fetch(`https://backend-glucemia.vercel.app/insulina`, {
+        const userId = localStorage.getItem('id')
+        const response = await fetch(`https://backend-glucemia.vercel.app/insulina?userId=${userId}`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`

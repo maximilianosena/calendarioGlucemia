@@ -192,7 +192,8 @@ button_submit.addEventListener("submit", async (e) => {
 async function getValores() {
     try {
         let token = localStorage.getItem("token")
-        const response = await fetch(`https://backend-glucemia.vercel.app/`, {
+        const userId = localStorage.getItem('id')
+        const response = await fetch(`https://backend-glucemia.vercel.app/?userId=${userId}`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`

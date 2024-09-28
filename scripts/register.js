@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
           console.log('Datos enviados:', obj);
   
           try {
-              const response = await fetch('https://backend-glucemia.vercel.app/register', {
+                  const response = await fetch(`https://backend-glucemia.vercel.app/register`, {
                   method: 'POST',
                   headers: {
                       'Content-Type': 'application/json',
