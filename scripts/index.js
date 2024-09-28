@@ -212,38 +212,6 @@ async function getValores() {
 
 }
 
-    const carouselContent = document.getElementById('carousel-content');
-    const carouselItem = document.createElement('div');
-    carouselItem.classList.add('carousel-item');
-
-    function view_Last_Resultados(result) {
-        const lastFive = result.length > 5 ? result.slice(-5) : result;
-    
-        if (lastFive.length === 0) {
-            carouselItem.innerHTML = 'No hay resultados para mostrar.';
-            return;
-        } else {
-            lastFive.forEach(item => {
-                // Crear un nuevo carousel-item para cada resultado
-                const carouselItem = document.createElement('div');
-                carouselItem.classList.add('carousel-item');
-    
-                // Añadir el contenido con interpolación
-                carouselItem.innerHTML = `
-                    <span>${item.fechaString} : ${item.valor}mg/dL</span>
-                `;
-    
-                // Agregar el nuevo item al contenedor del carousel
-                carouselContent.appendChild(carouselItem);
-            });
-    
-            // Si deseas que el primer item sea el activo
-            const firstItem = carouselContent.querySelector('.carousel-item');
-            if (firstItem) {
-                firstItem.classList.add('active');
-            }
-        }
-    }
 
 ///////////////////////Cerrar Sesión///////////////////////////////////
 

@@ -10,8 +10,38 @@ label {
     margin: 0.4rem 0;
   }
   
+  body{
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
   body#cuerpo{
     background-color: rgb(21, 184, 162);
+  }
+
+  .navbar{
+    padding: 1rem;
+  }
+
+  .navbar-brand, navbar-link {
+    font-size: 1.2rem;
+  }
+
+  .navbar-collapse {
+    justify-content: center;
+  }
+
+  .navbar-toggler {
+    margin-right: 10px;
+  }
+
+  .form-check { 
+    padding: 0.5rem 0;
+  }
+  
+  .form-select {
+    margin-bottom: 1rem;
   }
 
   .container {
@@ -41,3 +71,55 @@ label {
  .item#grafica{
   background-color: floralwhite;
  }
+
+
+ @media (max-width: 768px) {
+  h1{
+    font-size: 1.5rem;
+  }
+
+  .input-group-text {
+    font-size: 1rem;
+  }
+
+  .form-control {
+    font-size: 1rem;
+    padding: 0.5rem;
+  }
+
+  .btn {
+    font-size: 1rem;
+    padding: 0.7rem 1.5rem;
+  }
+
+  #submit {
+    width: 100%;
+  }
+
+  #notas{
+    font-size: 1rem;
+  }
+ }
+
+#myChart1 {
+  max-width: 100%;
+  height: auto;
+}
+
+#tiempoRango {
+  font-size: 1.2rem;
+}
+
+/* Responsive for smaller screens */
+@media (max-width: 576px) {
+  h3 {
+      font-size: 1.25rem;
+  }
+
+  .item {
+    margin-top: 20px;
+}
+
+}
+
+/* Ensure padding and alignment for buttons */
