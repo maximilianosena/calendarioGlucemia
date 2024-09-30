@@ -366,20 +366,33 @@ function tipo_grafica(mes){
                 </div>
             </body>
         </html>`
-        const response = await fetch('https://backend-glucemia.vercel.app/send-email-mensual', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                 'Authorization': `Bearer ${token}`
-            },
-            body: JSON.stringify({ email, subject, message })
-        });
-        
-        const result = await response.json();
-        if (result.success) {
-            alert('Email enviado!');
-        } else {
-            alert('Error al enviar el email');
+        try {
+            const response = await fetch('https://backend-glucemia.vercel.app/send-email-mensual', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({ email, subject, message })
+            });
+    
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error('Error al enviar el correo:', errorText);
+                alert('Error al enviar el email: ' + errorText);
+                return;
+            }
+    
+            const result = await response.json();
+            if (result.success) {
+                alert('Email enviado!');
+            } else {
+                alert('Error al enviar el email');
+            }
+    
+        } catch (error) {
+            console.error('Error al enviar el correo:', error);
+            alert('Se produjo un error al enviar el email: ' + error.message);
         }
     }
     
@@ -408,34 +421,41 @@ function tipo_grafica(mes){
             </body>
         </html>`
         try {
-             const response = await fetch('https://backend-glucemia.vercel.app/send-email', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                 'Authorization': `Bearer ${token}`
-            },
-            body: JSON.stringify({ email, subject, message })
-        });
-        
-        const result = await response.json();
-        if (result.success) {
-            alert('Email enviado!');
-        } else {
-            alert('Error al enviar el email');
-        }
+            const response = await fetch('https://backend-glucemia.vercel.app/send-email', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({ email, subject, message })
+            });
     
-    } catch (error) {
-    console.error('Error al enviar el correo:', error);
-    alert('Se produjo un error al enviar el email: ' + error.message);
-    }
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error('Error al enviar el correo:', errorText);
+                alert('Error al enviar el email: ' + errorText);
+                return;
+            }
+    
+            const result = await response.json();
+            if (result.success) {
+                alert('Email enviado!');
+            } else {
+                alert('Error al enviar el email');
+            }
+    
+        } catch (error) {
+            console.error('Error al enviar el correo:', error);
+            alert('Se produjo un error al enviar el email: ' + error.message);
+        }
     }
     
     window.onload = function () {
         const primerVez = localStorage.getItem('primeraVez');
-            
-        if (primerVez  ===  null) {
-            let email=localStorage.getItem("user")
-            let alias=localStorage.getItem("alias")
+    
+        if (primerVez === null) {
+            let email = localStorage.getItem("user");
+            let alias = localStorage.getItem("alias");
             email_bienvenida(email, alias);
         }
     
