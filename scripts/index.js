@@ -324,3 +324,61 @@ function tipo_grafica(mes){
       
       
       eliminarRegistrosAntiguos();
+      
+      window.onload = function () {
+        const lastMonth = localStorage.getItem('lastMonth');
+        const currentMonth = new Date().getMonth(); // Obtiene el mes actual (0-11)
+    
+        if (lastMonth !== null && lastMonth != currentMonth) {
+            let email=localStorage.getItem("user")
+            email_registrosMensuales(email);
+        }
+    
+        // Actualiza el mes almacenado en localStorage
+        localStorage.setItem('lastMonth', currentMonth);
+    };
+    
+    async function email_registrosMensuales(email) {
+
+        const rangoNormal = localStorage.getItem("normal")
+        const rangoAlto = localStorage.getItem("alto")
+        const rangoBajo = localStorage.getItem("bajo")
+        const valores = localStorage.getItem("nivelGlucosa")
+        const subject = "Informe mensual"
+    
+        const message = ` <html>
+            <body style="font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px;">
+                <div style="max-width: 600px; margin: auto; background: rgb(21, 184, 162);; padding: 20px; border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+                    <h1 style="color: #e7e4e4;text-align: center;">¡Hola!</h1>
+                    
+                    <p>A continuación te comparto información acerca de tu último mes: </p>
+                    <ul>
+                        <li>Su porcentaje en rango fue de: ${rangoNormal} %</li>
+                        <li>Su porcentaje por encima del rango fue de: ${rangoAlto} %</li>
+                        <li>Su porcentaje por debajo del rango fue de: ${rangoBajo} %</li>
+                        <li>Su nivel promedio de Glucosa fue de: ${valores} (mg/dL)</li>
+                        <li>No sabe cuanta Insulina darse? Utilice nuestra <a href="https://maximilianosena.github.io/pancrealculator/">Calculadora</a></li>
+                    </ul>
+                    <p>Deseamos serle de mucha ayuda.</p>
+                    <footer style="margin-top: 20px; border-top: 1px solid #eee; padding-top: 10px; color: #aaa;">
+                        <p>Muchas Gracias.</p>
+                    </footer>
+                </div>
+            </body>
+        </html>`
+        const response = await fetch('https://backend-glucemia.vercel.app/send-email', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email, subject, message })
+        });
+        
+        const result = await response.json();
+        if (result.success) {
+            alert('Email enviado!');
+        } else {
+            alert('Error al enviar el email');
+        }
+    }
+    

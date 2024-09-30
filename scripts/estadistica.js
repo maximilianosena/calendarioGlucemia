@@ -101,6 +101,9 @@ function promedioValores(dato) {
     let valorPromedioAlto = ((arriba.length / dato.valor.length) * 100).toFixed(2)
     let valorPromedioBajo = (abajo.length / dato.valor.length * 100).toFixed(2)
     let valorPromedioNormal = (normal.length / dato.valor.length * 100).toFixed(2)
+    localStorage.setItem("normal", valorPromedioNormal)
+    localStorage.setItem("alto", valorPromedioAlto)
+    localStorage.setItem("bajo", valorPromedioBajo)
 
     rango.innerHTML += `<h6>En el mes de ${dato.nombre}:</h6><br><p>${!isNaN(valorPromedioNormal) ? valorPromedioNormal : 0}% en Rango</p> <p> ${!isNaN(valorPromedioAlto) ? valorPromedioAlto : 0}% por encima del Rango</p> <p>${!isNaN(valorPromedioBajo) ? valorPromedioBajo : 0}% por debajo del rango</p> <br> `
 }
@@ -114,6 +117,7 @@ function promedio_En_Unidades(dato) {
     }
 
     let result = (total/dato.valor.length).toFixed(2)
+    localStorage.setItem("nivelGlucosa", result)
     glu_promedio.innerHTML += `<h6>La Glucosa promedio es de ${result > 0 ? result : 0} (mg/dL)<h6> <br>`
 }
 
@@ -144,3 +148,5 @@ function hemoglobina(año) {
    <figure> <figcaption class="blockquote-footer"><p>Este dato tomará fiabilidad al recibir datos de al menos los últimos 2 o 3 meses.<p></figcaption> </figure>
     `
 }
+
+  
