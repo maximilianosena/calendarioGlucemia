@@ -116,7 +116,7 @@ function promedio_En_Unidades(dato) {
         total += dato.valor[i]
     }
 
-    let result = (total/dato.valor.length).toFixed(2)
+    let result = Math.round(total/dato.valor.length)
     localStorage.setItem("nivelGlucosa", result)
     glu_promedio.innerHTML += `<h6>La Glucosa promedio es de ${result > 0 ? result : 0} (mg/dL)<h6> <br>`
 }
