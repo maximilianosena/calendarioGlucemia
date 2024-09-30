@@ -406,7 +406,8 @@ function tipo_grafica(mes){
                 </div>
             </body>
         </html>`
-        const response = await fetch('https://backend-glucemia.vercel.app/send-email', {
+        try {
+             const response = await fetch('https://backend-glucemia.vercel.app/send-email', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -420,6 +421,11 @@ function tipo_grafica(mes){
         } else {
             alert('Error al enviar el email');
         }
+    
+    } catch (error) {
+    console.error('Error al enviar el correo:', error);
+    alert('Se produjo un error al enviar el email: ' + error.message);
+    }
     }
     
     window.onload = function () {
