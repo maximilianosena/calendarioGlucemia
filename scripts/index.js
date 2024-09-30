@@ -379,85 +379,24 @@ function tipo_grafica(mes){
             if (!response.ok) {
                 const errorText = await response.text();
                 console.error('Error al enviar el correo:', errorText);
-                alert('Error al enviar el email: ' + errorText);
+               
                 return;
             }
     
             const result = await response.json();
             if (result.success) {
-                alert('Email enviado!');
+                console.log('Email enviado!');
             } else {
-                alert('Error al enviar el email');
+                console.log('Error al enviar el email');
             }
     
         } catch (error) {
             console.error('Error al enviar el correo:', error);
-            alert('Se produjo un error al enviar el email: ' + error.message);
+            
         }
     }
     
 
-    async function email_bienvenida(email, alias) {
-        let token = localStorage.getItem("token")
-        const subject = "Bienvenido a su calendario Glucémico"
+   
     
-        const message = ` <html>
-            <body style="font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px;">
-                <div style="max-width: 600px; margin: auto; background: rgb(21, 184, 162);; padding: 20px; border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
-                    <h1 style="color: #e7e4e4;text-align: center;">¡Bienvenido!</h1>
-                    <h3 style="color: #131212;text-align: center;">Hola ${alias}!</h3>
-                    <p>Gracias por utilizar esta aplicación, espero que sea de su agrado y le brinde la ayuda que necesita </p>
-                    <ul>
-                        <li>Lleve adelante sus registros de valores (mg/dL) </li>
-                        <li>Revise el historial en cualquier momento para saber cuantas unidades de Insulina se dió</li>
-                        <li>Obtenga un promedio de sus valores y cuanto tiempo estuvo en rango</li>
-                        <li>No sabe cuanta Insulina darse? Utilice nuestra <a href="https://maximilianosena.github.io/pancrealculator/">Calculadora</a></li>
-                    </ul>
-                    <p>Deseamos serle de mucha ayuda.</p>
-                    <footer style="margin-top: 20px; border-top: 1px solid #eee; padding-top: 10px; color: #aaa;">
-                        <p>Muchas Gracias.</p>
-                    </footer>
-                </div>
-            </body>
-        </html>`
-        try {
-            const response = await fetch('https://backend-glucemia.vercel.app/send-email', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                },
-                body: JSON.stringify({ email, subject, message })
-            });
     
-            if (!response.ok) {
-                const errorText = await response.text();
-                console.error('Error al enviar el correo:', errorText);
-                alert('Error al enviar el email: ' + errorText);
-                return;
-            }
-    
-            const result = await response.json();
-            if (result.success) {
-                alert('Email enviado!');
-            } else {
-                alert('Error al enviar el email');
-            }
-    
-        } catch (error) {
-            console.error('Error al enviar el correo:', error);
-            alert('Se produjo un error al enviar el email: ' + error.message);
-        }
-    }
-    
-    window.onload = function () {
-        const primerVez = localStorage.getItem('primeraVez');
-    
-        if (primerVez === null) {
-            let email = localStorage.getItem("user");
-            let alias = localStorage.getItem("alias");
-            email_bienvenida(email, alias);
-        }
-    
-        localStorage.setItem('primeraVez', true);
-    };
