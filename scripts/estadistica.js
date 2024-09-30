@@ -115,9 +115,9 @@ function promedioValores(dato) {
         data: {
             labels: ['Por encima del Rango', 'En Rango', 'Por debajo del Rango'],
             datasets: [{
-                label: 'Tiempo en Rango',
+                label: 'Tiempo en Rango (%)',
                 data: [valorPromedioAlto, valorPromedioNormal, valorPromedioBajo],
-                backgroundColor: ['red', 'green', 'blue'],
+                backgroundColor: ['rgb(211, 47, 47)', 'rgb(20, 90, 50)', 'rgb(25, 118, 210)'],
                 borderWidth: 0 
             }]
             
@@ -183,9 +183,9 @@ function promedioValoresMesAnterior(dato) {
             normal.push(dato.valor[i])
         }
     }
-    let valorPromedioAlto = ((arriba.length / dato.valor.length) * 100).toFixed(2)
-    let valorPromedioBajo = (abajo.length / dato.valor.length * 100).toFixed(2)
-    let valorPromedioNormal = (normal.length / dato.valor.length * 100).toFixed(2)
+    let valorPromedioAlto = arriba.length>0?((arriba.length / dato.valor.length) * 100).toFixed(2):0
+    let valorPromedioBajo = abajo.length>0?(abajo.length / dato.valor.length * 100).toFixed(2):0
+    let valorPromedioNormal = normal.length>0?(normal.length / dato.valor.length * 100).toFixed(2):0
     localStorage.setItem("normal", valorPromedioNormal)
     localStorage.setItem("alto", valorPromedioAlto)
     localStorage.setItem("bajo", valorPromedioBajo)

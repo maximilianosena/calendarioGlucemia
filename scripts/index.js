@@ -263,7 +263,7 @@ function tipo_grafica(mes){
         data: {
             labels: arrayLabels, // Etiquetas en el eje X
             datasets: [{
-                label: 'Valores en el Mes Actual',
+                label: 'Valor (mg/dL) en el Mes Actual',
                 data: arrayData, // Datos de cada barra
                 backgroundColor: 'black', // Color de fondo de las barras
                 borderColor: 'black', // Color del borde de las barras

@@ -1,3 +1,6 @@
+
+
+
 label {
     display: block;
     font:
@@ -63,15 +66,14 @@ label {
   background-color: rgba(20, 170, 150, 0.507);
  }
 
- .item#tiempoRango, .item#ultimos5{
-  background-color: rgba(129, 230, 216, 0.507);
- }
-
  
- .item#grafica{
-  background-color: floralwhite;
+ .item#promedioValores{
+  background-color: rgba(20, 170, 150, 0.507);
  }
 
+ #glicosilada, #promedio{
+  background-color: rgba(20, 170, 150, 0.507);
+ }
 
  @media (max-width: 768px) {
   h1{
@@ -99,27 +101,61 @@ label {
   #notas{
     font-size: 1rem;
   }
+
+  .container {
+    display: flex;
+    flex-direction: column; /* Apilar elementos en una columna */
+    align-items: center; /* Centrar los elementos */
+  }
+  
+  .item {
+    width: 100%; /* Asegurarte de que los elementos ocupen el ancho completo */
+    max-width: 600px; /* Ancho máximo para evitar que se estiren demasiado */
+    margin-bottom: 20px; /* Espaciado entre los elementos */
+  }
+  
+  canvas {
+    width: 100% !important; /* Forzar que el canvas ocupe el ancho del contenedor */
+    height: auto !important; /* Mantener la relación de aspecto */
+  }
  }
 
-#myChart1 {
-  max-width: 100%;
-  height: auto;
-}
+
 
 #tiempoRango {
   font-size: 1.2rem;
 }
 
+
+
 /* Responsive for smaller screens */
-@media (max-width: 576px) {
+@media (max-width: 600px) {
   h3 {
       font-size: 1.25rem;
   }
 
-  .item {
-    margin-top: 20px;
+
+.container {
+  display: flex;
+  flex-direction: column; /* Apilar elementos en una columna */
+  align-items: center; /* Centrar los elementos */
 }
 
+.item {
+  width: 100%; /* Asegurarte de que los elementos ocupen el ancho completo */
+  max-width: 600px; /* Ancho máximo para evitar que se estiren demasiado */
+  margin: 0 auto 20px; /* Solo margen inferior */
+    padding: 0; /* Asegúrate de que no haya padding adicional */
+}
+
+canvas {
+  width: 100% !important; /* Forzar que el canvas ocupe el ancho del contenedor */
+  height: auto !important; /* Mantener la relación de aspecto */
+}
+
+#myPieChart{
+
+}
 }
 
 .toast-header {
