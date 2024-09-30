@@ -72,12 +72,19 @@ function separarMes(variable) {
     // Calcula el índice del último mes
     let mesIndex = (mesActual + 12) % 12;
 
+
+    let mes_Anterior_Al_Actual = (mesActual - 1 + 12) % 12;
+    let promedio_mes_Anterior_Al_Actual = promedio[mes_Anterior_Al_Actual] 
+
     // Obtén el último mes
     let ultimoMes = promedio[mesIndex];
 
     console.log(ultimoMes);
     promedioValores(ultimoMes)
     promedio_En_Unidades(ultimoMes)
+
+    promedioValoresMesAnterior(promedio_mes_Anterior_Al_Actual)
+    promedio_En_Unidades_MesAnterior(promedio_mes_Anterior_Al_Actual)
     hemoglobina(ultimosTresMeses)
     return promedio; // Devuelve el array de promedio
 }
@@ -101,10 +108,7 @@ function promedioValores(dato) {
     let valorPromedioAlto = ((arriba.length / dato.valor.length) * 100).toFixed(2)
     let valorPromedioBajo = (abajo.length / dato.valor.length * 100).toFixed(2)
     let valorPromedioNormal = (normal.length / dato.valor.length * 100).toFixed(2)
-    localStorage.setItem("normal", valorPromedioNormal)
-    localStorage.setItem("alto", valorPromedioAlto)
-    localStorage.setItem("bajo", valorPromedioBajo)
-
+    
     rango.innerHTML += `<h6>En el mes de ${dato.nombre}:</h6><br><p>${!isNaN(valorPromedioNormal) ? valorPromedioNormal : 0}% en Rango</p> <p> ${!isNaN(valorPromedioAlto) ? valorPromedioAlto : 0}% por encima del Rango</p> <p>${!isNaN(valorPromedioBajo) ? valorPromedioBajo : 0}% por debajo del rango</p> <br> `
 }
 
@@ -117,7 +121,6 @@ function promedio_En_Unidades(dato) {
     }
 
     let result = Math.round(total/dato.valor.length)
-    localStorage.setItem("nivelGlucosa", result)
     glu_promedio.innerHTML += `<h6>La Glucosa promedio es de ${result > 0 ? result : 0} (mg/dL)<h6> <br>`
 }
 
@@ -150,3 +153,36 @@ function hemoglobina(año) {
 }
 
   
+function promedioValoresMesAnterior(dato) {
+    let arriba = []
+    let abajo = []
+    let normal = []
+    for (let i = 0; i < dato.valor.length; i++) {
+        console.log(dato.valor[i])
+        if (dato.valor[i] > 180) {
+            arriba.push(dato.valor[i])
+        } else if (dato.valor[i] < 70) {
+            abajo.push(dato.valor[i])
+        } else {
+            normal.push(dato.valor[i])
+        }
+    }
+    let valorPromedioAlto = ((arriba.length / dato.valor.length) * 100).toFixed(2)
+    let valorPromedioBajo = (abajo.length / dato.valor.length * 100).toFixed(2)
+    let valorPromedioNormal = (normal.length / dato.valor.length * 100).toFixed(2)
+    localStorage.setItem("normal", valorPromedioNormal)
+    localStorage.setItem("alto", valorPromedioAlto)
+    localStorage.setItem("bajo", valorPromedioBajo)
+
+   
+}
+
+function promedio_En_Unidades_MesAnterior(dato) {
+    let total = 0
+    for (let i = 0; i < dato.valor.length; i++) {
+        total += dato.valor[i]
+    }
+
+    let result = Math.round(total/dato.valor.length)
+    localStorage.setItem("nivelGlucosa", result)
+}
