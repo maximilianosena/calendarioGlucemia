@@ -345,7 +345,7 @@ function tipo_grafica(mes){
         const rangoBajo = localStorage.getItem("bajo")
         const valores = localStorage.getItem("nivelGlucosa")
         const subject = "Informe mensual"
-    
+        let token = localStorage.getItem("token")
         const message = ` <html>
             <body style="font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px;">
                 <div style="max-width: 600px; margin: auto; background: rgb(21, 184, 162);; padding: 20px; border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
@@ -369,7 +369,8 @@ function tipo_grafica(mes){
         const response = await fetch('https://backend-glucemia.vercel.app/send-email-mensual', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                 'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify({ email, subject, message })
         });
@@ -384,7 +385,7 @@ function tipo_grafica(mes){
     
 
     async function email_bienvenida(email, alias) {
-
+        let token = localStorage.getItem("token")
         const subject = "Bienvenido a su calendario Glucémico"
     
         const message = ` <html>
@@ -410,7 +411,8 @@ function tipo_grafica(mes){
              const response = await fetch('https://backend-glucemia.vercel.app/send-email', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                 'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify({ email, subject, message })
         });
