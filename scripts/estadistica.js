@@ -74,7 +74,7 @@ function separarMes(variable) {
 
 
     let mes_Anterior_Al_Actual = (mesActual - 1 + 12) % 12;
-    let promedio_mes_Anterior_Al_Actual = promedio[mes_Anterior_Al_Actual] 
+    let promedio_mes_Anterior_Al_Actual = promedio[mes_Anterior_Al_Actual]
 
     // Obtén el último mes
     let ultimoMes = promedio[mesIndex];
@@ -108,8 +108,24 @@ function promedioValores(dato) {
     let valorPromedioAlto = ((arriba.length / dato.valor.length) * 100).toFixed(2)
     let valorPromedioBajo = (abajo.length / dato.valor.length * 100).toFixed(2)
     let valorPromedioNormal = (normal.length / dato.valor.length * 100).toFixed(2)
-    
-    rango.innerHTML += `<h6>En el mes de ${dato.nombre}:</h6><br><p>${!isNaN(valorPromedioNormal) ? valorPromedioNormal : 0}% en Rango</p> <p> ${!isNaN(valorPromedioAlto) ? valorPromedioAlto : 0}% por encima del Rango</p> <p>${!isNaN(valorPromedioBajo) ? valorPromedioBajo : 0}% por debajo del rango</p> <br> `
+
+    const ctxPie = document.getElementById('myPieChart').getContext('2d');
+    const myPieChart = new Chart(ctxPie, {
+        type: 'pie',
+        data: {
+            labels: ['Por encima del Rango', 'En Rango', 'Por debajo del Rango'],
+            datasets: [{
+                label: 'Tiempo en Rango',
+                data: [valorPromedioAlto, valorPromedioNormal, valorPromedioBajo],
+                backgroundColor: ['red', 'green', 'blue'],
+                borderWidth: 0 
+            }]
+            
+        },    options: {
+            responsive: true,
+            maintainAspectRatio: false,  // Opcional, permite más control sobre el tamaño
+        }
+    });
 }
 
 let glu_promedio = document.getElementById("promedio")
@@ -120,7 +136,7 @@ function promedio_En_Unidades(dato) {
         total += dato.valor[i]
     }
 
-    let result = Math.round(total/dato.valor.length)
+    let result = Math.round(total / dato.valor.length)
     glu_promedio.innerHTML += `<h6>La Glucosa promedio es de ${result > 0 ? result : 0} (mg/dL)<h6> <br>`
 }
 
@@ -149,10 +165,10 @@ function hemoglobina(año) {
     let final = result_hemoglobina.toFixed(2)
     hemoglobina_glicosilada.innerHTML += `<h6>La hemoglobina Glicosilada es de ${result_hemoglobina > 0 ? final : 0}%<h6> <br>
    <figure> <figcaption class="blockquote-footer"><p>Este dato tomará fiabilidad al recibir datos de al menos los últimos 2 o 3 meses.<p></figcaption> </figure>
-    `
+    <br>`
 }
 
-  
+
 function promedioValoresMesAnterior(dato) {
     let arriba = []
     let abajo = []
@@ -174,7 +190,7 @@ function promedioValoresMesAnterior(dato) {
     localStorage.setItem("alto", valorPromedioAlto)
     localStorage.setItem("bajo", valorPromedioBajo)
 
-   
+
 }
 
 function promedio_En_Unidades_MesAnterior(dato) {
@@ -183,6 +199,6 @@ function promedio_En_Unidades_MesAnterior(dato) {
         total += dato.valor[i]
     }
 
-    let result = Math.round(total/dato.valor.length)
+    let result = Math.round(total / dato.valor.length)
     localStorage.setItem("nivelGlucosa", result)
 }

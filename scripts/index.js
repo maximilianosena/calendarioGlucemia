@@ -273,6 +273,7 @@ function tipo_grafica(mes){
         options: {
             responsive: true, // Hacer el gráfico responsive
         maintainAspectRatio: false, // Permitir cambiar la relación de aspecto
+        
            plugins: {
                 annotation: {
                     annotations: {
@@ -280,10 +281,28 @@ function tipo_grafica(mes){
                             type: 'box',
                             xMin: arrayLabels.sort() - 10,
                             xMax: arrayLabels.sort() -1,
-                            yMin: 1.80, // Valor del eje Y a partir del cual deseas cambiar el color
+                            yMin: 180, // Valor del eje Y a partir del cual deseas cambiar el color
                             yMax: Math.max(...arrayData), // Valor máximo del eje Y para cubrir todo el rango
-                            backgroundColor: 'rgba(255,99,71)', 
+                            backgroundColor: 'rgba(255, 99, 132, 0.5)', 
                             borderColor: 'rgba(255, 99, 132, 1)',
+                            borderWidth: 1
+                        }, highlight2: {
+                            type: 'box',
+                            xMin: arrayLabels.sort() - 10,
+                            xMax: arrayLabels.sort() -1,
+                            yMin: 0, // Nivel más bajo
+                            yMax: 70, // Nivel más alto
+                            backgroundColor: 'rgba(80, 133, 188, 0.5)',
+                            borderColor: 'rgba(80, 133, 188, 1)',
+                            borderWidth: 1
+                        }, highlight3: {
+                            type: 'box',
+                            xMin: arrayLabels.sort() - 10,
+                            xMax: arrayLabels.sort() -1,
+                            yMin: 70, // Nivel más bajo
+                            yMax: 180, // Nivel más alto
+                            backgroundColor: 'rgba(0, 128, 0, 0.25)',
+                            borderColor: 'rgba(0, 128, 0, 1)',
                             borderWidth: 1
                         }
                     }
@@ -291,6 +310,9 @@ function tipo_grafica(mes){
             },
             scales: {
                 y: {
+                    grid: {
+                        display: false  // Desactiva las líneas guías en el eje Y
+                    },
                     beginAtZero: true // Empieza el eje Y en cero
                 }
             }
