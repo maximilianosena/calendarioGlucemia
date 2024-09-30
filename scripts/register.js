@@ -40,8 +40,10 @@ document.addEventListener("DOMContentLoaded", function () {
               console.log('Response status:', response.status);  // Verificar el estado de la respuesta
   
               if (response.ok) {
+                    console.log(user)
+                    (console.log(user_alias))
                     email_bienvenida(user, user_alias)
-                  location.replace("index.html");
+                 
               } else if (response.status === 409) {  // 409: Conflicto (alias o email ya existen)
                 const result = await response.json();  
                 if (result.message.includes("Alias")) {
