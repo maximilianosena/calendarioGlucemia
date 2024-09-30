@@ -425,7 +425,7 @@ function tipo_grafica(mes){
     window.onload = function () {
         const primerVez = localStorage.getItem('primeraVez');
             
-        if (primerVez !== null) {
+        if (primerVez  ===  null) {
             let email=localStorage.getItem("user")
             let alias=localStorage.getItem("alias")
             email_bienvenida(email, alias);
