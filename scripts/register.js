@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
   
               if (response.ok) {
                     console.log(user)
-                    (console.log(user_alias))
+                    console.log(user_alias)
                     email_bienvenida(user, user_alias)
                  
               } else if (response.status === 409) {  // 409: Conflicto (alias o email ya existen)
