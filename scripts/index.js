@@ -282,7 +282,7 @@ function tipo_grafica(mes){
                             xMin: arrayLabels.sort() - 10,
                             xMax: arrayLabels.sort() -1,
                             yMin: 180, // Valor del eje Y a partir del cual deseas cambiar el color
-                            yMax: Math.max(...arrayData), // Valor máximo del eje Y para cubrir todo el rango
+                            
                             backgroundColor: 'rgba(255, 99, 132, 0.5)', 
                             borderColor: 'rgba(255, 99, 132, 1)',
                             borderWidth: 1
