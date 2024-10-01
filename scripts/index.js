@@ -1,5 +1,3 @@
-document.addEventListener('DOMContentLoaded', function () {
-
 
 getValores()
 
@@ -348,7 +346,7 @@ yMax: Math.max(...arrayData), // Valor máximo del eje Y para cubrir todo el ran
       
       eliminarRegistrosAntiguos();
       
-      
+      document.addEventListener('DOMContentLoaded', function () {
         const lastMonth = localStorage.getItem('lastMonth');
 const currentMonth = new Date().getMonth(); // Obtiene el mes actual (0-11)
 
@@ -360,7 +358,7 @@ if (lastMonth !== null && lastMonth != currentMonth) {
 // Actualiza el mes almacenado en localStorage
 localStorage.setItem('lastMonth', currentMonth);
 };
-
+})
     
     async function email_registrosMensuales(email) {
 
@@ -473,7 +471,9 @@ localStorage.setItem('lastMonth', currentMonth);
             
         }
     }
+
     
+document.addEventListener('DOMContentLoaded', function () {
     
         const primerVez = localStorage.getItem('primeraVez');
     
