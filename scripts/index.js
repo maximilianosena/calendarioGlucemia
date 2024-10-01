@@ -219,11 +219,12 @@ async function getValores() {
                 let ultimo = result[result.length - 1].fecha
                 let ultimo_corte = ultimo.split("-")
                 let ultimo_mes = ultimo_corte[1]
-            if (mes_Actual !== ultimo_corte) {
+            if (mes_Actual !== ultimo_mes) {
                 console.log(ultimo_mes)
+                console.log(mes_Actual)
                 let email = localStorage.getItem("user");
                 email_registrosMensuales(email);
-            }
+            } 
         }
         }
     }
