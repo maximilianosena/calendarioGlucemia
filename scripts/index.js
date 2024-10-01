@@ -357,7 +357,6 @@ if (lastMonth !== null && lastMonth != currentMonth) {
 
 // Actualiza el mes almacenado en localStorage
 localStorage.setItem('lastMonth', currentMonth);
-};
 })
     
     async function email_registrosMensuales(email) {
