@@ -215,6 +215,16 @@ async function getValores() {
             const result = await response.json()
             console.log(result)
             tipo_grafica(result)
+            {
+                let ultimo = result[result.length - 1].fecha
+                let ultimo_corte = ultimo.split("-")
+                let ultimo_mes = ultimo_corte[1]
+            if (mes_Actual !== ultimo_corte) {
+                console.log(ultimo_mes)
+                let email = localStorage.getItem("user");
+                email_registrosMensuales(email);
+            }
+        }
         }
     }
     catch (e) {
@@ -350,10 +360,7 @@ yMax: Math.max(...arrayData), // Valor máximo del eje Y para cubrir todo el ran
         const lastMonth = localStorage.getItem('lastMonth');
 const currentMonth = new Date().getMonth(); // Obtiene el mes actual (0-11)
 
-if (lastMonth !== null && lastMonth != currentMonth) {
-    let email = localStorage.getItem("user");
-    email_registrosMensuales(email);
-}
+
 
 // Actualiza el mes almacenado en localStorage
 localStorage.setItem('lastMonth', currentMonth);
@@ -486,3 +493,4 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     
 })
+
