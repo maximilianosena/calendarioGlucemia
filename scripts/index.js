@@ -1,4 +1,4 @@
-
+document.addEventListener('DOMContentLoaded', function () {
 
 
 getValores()
@@ -348,18 +348,19 @@ yMax: Math.max(...arrayData), // Valor máximo del eje Y para cubrir todo el ran
       
       eliminarRegistrosAntiguos();
       
-      window.onload = function () {
+      
         const lastMonth = localStorage.getItem('lastMonth');
-        const currentMonth = new Date().getMonth(); // Obtiene el mes actual (0-11)
-    
-        if (lastMonth !== null && lastMonth != currentMonth) {
-            let email=localStorage.getItem("user")
-            email_registrosMensuales(email);
-        }
-    
-        // Actualiza el mes almacenado en localStorage
-        localStorage.setItem('lastMonth', currentMonth);
-    };
+const currentMonth = new Date().getMonth(); // Obtiene el mes actual (0-11)
+
+if (lastMonth !== null && lastMonth != currentMonth) {
+    let email = localStorage.getItem("user");
+    email_registrosMensuales(email);
+}
+
+// Actualiza el mes almacenado en localStorage
+localStorage.setItem('lastMonth', currentMonth);
+};
+
     
     async function email_registrosMensuales(email) {
 
@@ -473,7 +474,7 @@ yMax: Math.max(...arrayData), // Valor máximo del eje Y para cubrir todo el ran
         }
     }
     
-    window.onload = function () {
+    
         const primerVez = localStorage.getItem('primeraVez');
     
         if (primerVez === "true") {
@@ -484,4 +485,5 @@ yMax: Math.max(...arrayData), // Valor máximo del eje Y para cubrir todo el ran
         } else {
         console.log("Ya ingresó")
     }
-    };
+    
+})
