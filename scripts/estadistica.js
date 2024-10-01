@@ -1,3 +1,5 @@
+
+document.addEventListener('DOMContentLoaded', function () {
 async function getValores() {
     try {
         let token = localStorage.getItem("token")
@@ -202,3 +204,4 @@ function promedio_En_Unidades_MesAnterior(dato) {
     let result = Math.round(total / dato.valor.length)
     localStorage.setItem("nivelGlucosa", result)
 }
+})
