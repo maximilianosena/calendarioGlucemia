@@ -221,11 +221,15 @@ async function getValores() {
             let ultimo_mes = ultimo_corte[1];
 
             if (mes_Actual !== ultimo_mes) {
+alert("Son meses distintos")
                 console.log(ultimo_mes);
                 console.log(mes_Actual);
                 let email = localStorage.getItem("user");
                 email_registrosMensuales(email);
             }
+if (numeroDia_Actual==="02"){
+alert("hoy es 2")
+}
 tipo_grafica(result);
         }
     } catch (e) {
