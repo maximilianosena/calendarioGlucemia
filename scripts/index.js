@@ -346,6 +346,7 @@ x: {
                     grid: {
                         display: false  // Desactiva las líneas guías en el eje Y
                     },
+max: 600,
                     beginAtZero: true // Empieza el eje Y en cero
                 }
             }
