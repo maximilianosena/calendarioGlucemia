@@ -337,6 +337,11 @@ yMax: 600,
                 }
             },
             scales: {
+x: {
+        min: ultimos10[0], // Establece xMin al primer elemento de ultimos10
+        max: ultimos10[ultimos10.length - 1], // Establece xMax al último elemento de ultimos10
+        // otras configuraciones si es necesario
+    },
                 y: {
                     grid: {
                         display: false  // Desactiva las líneas guías en el eje Y
