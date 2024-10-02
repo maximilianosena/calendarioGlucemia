@@ -215,17 +215,12 @@ async function getValores() {
             const result = await response.json()
             console.log(result)
             tipo_grafica(result)
-            {
-                let ultimo = result[result.length - 1].fecha
-                let ultimo_corte = ultimo.split("-")
-                let ultimo_mes = ultimo_corte[1]
-            if (mes_Actual !== ultimo_mes) {
-                console.log(ultimo_mes)
-                console.log(mes_Actual)
+            
+                
                 let email = localStorage.getItem("user");
                 email_registrosMensuales(email);
-            } 
-        }
+            
+        
         }
     }
     catch (e) {
