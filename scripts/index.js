@@ -249,6 +249,11 @@ btn_close.addEventListener("click", ()=>{
 const ctz = document.getElementById('myChart1').getContext('2d');
 let myChart1; 
 
+function toDateTime(fecha, hora) {
+    const [day, month, year] = fecha.split('-').map(Number);
+    const [hours, minutes] = hora.split(':').map(Number);
+    return new Date(year, month - 1, day, hours, minutes); // Mes - 1 porque es 0-indexado
+}
 
 
 function tipo_grafica(mes){
