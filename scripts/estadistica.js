@@ -111,23 +111,7 @@ function promedioValores(dato) {
     let valorPromedioBajo = (abajo.length / dato.valor.length * 100).toFixed(2)
     let valorPromedioNormal = (normal.length / dato.valor.length * 100).toFixed(2)
 
-    const ctxPie = document.getElementById('myPieChart').getContext('2d');
-    const myPieChart = new Chart(ctxPie, {
-        type: 'pie',
-        data: {
-            labels: ['Por encima del Rango', 'En Rango', 'Por debajo del Rango'],
-            datasets: [{
-                label: 'Tiempo en Rango (%)',
-                data: [valorPromedioAlto, valorPromedioNormal, valorPromedioBajo],
-                backgroundColor: ['rgb(211, 47, 47)', 'rgb(20, 90, 50)', 'rgb(25, 118, 210)'],
-                borderWidth: 0 
-            }]
-            
-        },    options: {
-            responsive: true,
-            maintainAspectRatio: false,  // Opcional, permite más control sobre el tamaño
-        }
-    });
+    
 }
 
 let glu_promedio = document.getElementById("promedio")
