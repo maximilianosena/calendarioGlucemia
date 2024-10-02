@@ -309,7 +309,7 @@ let ultimos10datos = arrayData.slice(-10)
                             xMin: ultimos10[0],
                             xMax: ultimos10[ultimos10.length -1],
                             yMin: 180, // Valor del eje Y a partir del cual deseas cambiar el color
-yMax: 700, 
+yMax: 600, 
                             
                             backgroundColor: 'rgba(255, 99, 132, 0.5)', 
                             borderColor: 'rgba(255, 99, 132, 1)',
