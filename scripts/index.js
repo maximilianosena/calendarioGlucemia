@@ -11,7 +11,7 @@ const MESES = ["01", "02", "03", "04", "05", "06", "07",
 
 let mes_Actual = MESES[fecha_Actual.getMonth()]
 let año_Actual = fecha_Actual.getFullYear()
-let numeroDia_Actual = fecha_Actual.getDate()
+let numeroDia_Actual = fecha_Actual.getDate()<10? `0${fecha_Actual.getDate()}`:fecha_Actual.getDate()
 
 let obj_fecha = `${numeroDia_Actual}-${mes_Actual}-${año_Actual}`
 
