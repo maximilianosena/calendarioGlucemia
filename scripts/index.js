@@ -282,7 +282,7 @@ let arrayData = []
         arrayData.push(combinedArray[i].valor)
     }
 
-
+let ultimos10 = arrayLabels.slice(-10)
     
     myChart1 = new Chart(ctz, {
         type: 'line', // Tipo de gráfico: bar, line, pie, etc.
@@ -305,8 +305,8 @@ let arrayData = []
                     annotations: {
                         highlight: {
                             type: 'box',
-                            xMin: arrayLabels.sort() - 10,
-                            xMax: arrayLabels.sort() -1,
+                            xMin: ultimos10[0],
+                            xMax: ultimos10[ultimos10.length -1],
                             yMin: 180, // Valor del eje Y a partir del cual deseas cambiar el color
 yMax: Math.max(...arrayData), // Valor máximo del eje Y para cubrir todo el rango
                             
@@ -315,8 +315,8 @@ yMax: Math.max(...arrayData), // Valor máximo del eje Y para cubrir todo el ran
                             borderWidth: 1
                         }, highlight2: {
                             type: 'box',
-                            xMin: arrayLabels.sort() - 10,
-                            xMax: arrayLabels.sort() -1,
+                            xMin: ultimos10[0],
+                            xMax: ultimos10[ultimos10.length -1],
                             yMin: 0, // Nivel más bajo
                             yMax: 70, // Nivel más alto
                             backgroundColor: 'rgba(80, 133, 188, 0.5)',
@@ -324,8 +324,8 @@ yMax: Math.max(...arrayData), // Valor máximo del eje Y para cubrir todo el ran
                             borderWidth: 1
                         }, highlight3: {
                             type: 'box',
-                            xMin: arrayLabels.sort() - 10,
-                            xMax: arrayLabels.sort() -1,
+                            xMin: ultimos10[0],
+                            xMax: ultimos10[ultimos10.length -1],
                             yMin: 70, // Nivel más bajo
                             yMax: 180, // Nivel más alto
                             backgroundColor: 'rgba(0, 128, 0, 0.25)',
