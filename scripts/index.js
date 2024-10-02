@@ -271,14 +271,16 @@ const combinedArray = mes.map(item => ({
 combinedArray.sort((a, b) => {
     const dateA = toDateTime(a.fechaString, a.hora); // Asegúrate de obtener la hora correspondiente
     const dateB = toDateTime(b.fechaString, b.hora);
-    return dateB - dateA; // De más reciente a más antiguo
+    return dateA - dateB; // De más reciente a más antiguo
 });
 
 // Extraer labels y data ordenados
 const arrayLabels = combinedArray.map(item => item.fechaString);
 
-const arrayData = combinedArray.map(item => item.valor);
-
+let arrayData = []
+    for (let i=0; i<combined array.length;i++){
+        arrayData.push(combinedArray[i].valor)
+    }
 
 
     
