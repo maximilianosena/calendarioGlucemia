@@ -276,7 +276,11 @@ combinedArray.sort((a, b) => {
 
 // Extraer labels y data ordenados
 const arrayLabels = combinedArray.map(item => item.fechaString);
-const arrayData = combinedArray.map(item => item.valor);
+
+let arrayData = []
+    for (let i=0; i<combinedArray.length;i++){
+        arrayData.push(combinedArray[i].valor)
+    }
 
     
     myChart1 = new Chart(ctz, {
