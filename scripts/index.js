@@ -271,7 +271,7 @@ const combinedArray = mes.map(item => ({
 combinedArray.sort((a, b) => {
     const dateA = toDateTime(a.fechaString, a.hora); // Asegúrate de obtener la hora correspondiente
     const dateB = toDateTime(b.fechaString, b.hora);
-    return dateA - dateB; // De más reciente a más antiguo
+    return dateA - dateB;
 });
 
 // Extraer labels y data ordenados
@@ -283,7 +283,7 @@ let arrayData = []
     }
 
 let ultimos10 = arrayLabels.slice(-10)
-    
+    if (ultimos10.length < 1) return;
     myChart1 = new Chart(ctz, {
         type: 'line', // Tipo de gráfico: bar, line, pie, etc.
         data: {
