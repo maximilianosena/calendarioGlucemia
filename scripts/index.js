@@ -255,17 +255,23 @@ function tipo_grafica(mes){
 
    
     
-    let arrayLabels =[]
+    // Combinar fechaString y valor en un nuevo array
+const combinedArray = mes.map(item => ({
+    fechaString: item.fechaString,
+    valor: item.valor,
+}));
 
-        for (let i = 0; i < mes.length; i++) {
-            arrayLabels.push(mes[i].fechaString); 
-        }
-        
-    
-    let arrayData = []
-    for (let i=0; i<mes.length;i++){
-        arrayData.push(mes[i].valor)
-    }
+// Ordenar por fecha y hora
+combinedArray.sort((a, b) => {
+    const dateA = toDateTime(a.fechaString, hora); // Asegúrate de obtener la hora correspondiente
+    const dateB = toDateTime(b.fechaString, hora);
+    return dateB - dateA; // De más reciente a más antiguo
+});
+
+// Extraer labels y data ordenados
+const arrayLabels = combinedArray.map(item => item.fechaString);
+const arrayData = combinedArray.map(item => item.valor);
+
     
     myChart1 = new Chart(ctz, {
         type: 'line', // Tipo de gráfico: bar, line, pie, etc.
