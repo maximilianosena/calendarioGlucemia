@@ -215,10 +215,7 @@ async function getValores() {
 
         if (response.ok) {
             const result = await response.json();
-            console.log(result);
-            tipo_grafica(result);
-
-            
+            console.log(result);       
             let ultimo = result[result.length - 1].fecha;
             let ultimo_corte = ultimo.split("-");
             let ultimo_mes = ultimo_corte[1];
@@ -229,6 +226,7 @@ async function getValores() {
                 let email = localStorage.getItem("user");
                 email_registrosMensuales(email);
             }
+tipo_grafica(result);
         }
     } catch (e) {
         console.error("Error: ", e);
@@ -378,16 +376,7 @@ function tipo_grafica(mes) {
       
       eliminarRegistrosAntiguos();
       
-      document.addEventListener('DOMContentLoaded', function () {
-        const lastMonth = localStorage.getItem('lastMonth');
-const currentMonth = new Date().getMonth(); // Obtiene el mes actual (0-11)
-
-
-
-// Actualiza el mes almacenado en localStorage
-localStorage.setItem('lastMonth', currentMonth);
-})
-    
+      
     async function email_registrosMensuales(email) {
 
         const rangoNormal = localStorage.getItem("normal")
