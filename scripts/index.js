@@ -283,6 +283,7 @@ let arrayData = []
     }
 
 let ultimos10 = arrayLabels.slice(-10)
+let ultimos10datos = arrayData.slice(-10)
     if (ultimos10.length < 1) return;
     myChart1 = new Chart(ctz, {
         type: 'line', // Tipo de gráfico: bar, line, pie, etc.
@@ -290,7 +291,7 @@ let ultimos10 = arrayLabels.slice(-10)
             labels: arrayLabels, // Etiquetas en el eje X
             datasets: [{
                 label: 'Valor (mg/dL) en el Mes Actual',
-                data: arrayData, // Datos de cada barra
+                data: ultimos10datos, // Datos de cada barra
                 backgroundColor: 'black', // Color de fondo de las barras
                 borderColor: 'black', // Color del borde de las barras
                 borderWidth: 2
