@@ -9,7 +9,7 @@ let fecha_Actual = new Date()
 const MESES = ["01", "02", "03", "04", "05", "06", "07",
     "08", "09", "10", "11", "12"]
 
-let mes_Actual = MESES[fecha_Actual.getMonth()]
+let mes_Actual = MESES[fecha_Actual.getMonth()]<10? `0${MESES[fecha_Actual.getMonth()]}`:MESES[fecha_Actual.getMonth()]
 let año_Actual = fecha_Actual.getFullYear()
 let numeroDia_Actual = fecha_Actual.getDate()<10? `0${fecha_Actual.getDate()}`:fecha_Actual.getDate()
 
