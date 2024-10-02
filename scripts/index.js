@@ -256,79 +256,76 @@ function toDateTime(fecha, hora) {
 }
 
 
-function tipo_grafica(mes){
-
-   
-    
+function tipo_grafica(mes) {
     // Combinar fechaString y valor en un nuevo array
-const combinedArray = mes.map(item => ({
-    fechaString: item.fechaString,
-    hora: item.hora,
-    valor: item.valor,
-}));
+    const combinedArray = mes.map(item => ({
+        fechaString: item.fechaString,
+        hora: item.hora,
+        valor: item.valor,
+    }));
 
-// Ordenar por fecha y hora
-combinedArray.sort((a, b) => {
-    const dateA = toDateTime(a.fechaString, a.hora); // Asegúrate de obtener la hora correspondiente
-    const dateB = toDateTime(b.fechaString, b.hora);
-    return dateA - dateB;
-});
+    // Ordenar por fecha y hora
+    combinedArray.sort((a, b) => {
+        const dateA = toDateTime(a.fechaString, a.hora);
+        const dateB = toDateTime(b.fechaString, b.hora);
+        return dateA - dateB;
+    });
 
-// Extraer labels y data ordenados
-const arrayLabels = combinedArray.map(item => item.fechaString);
+    // Extraer labels y data ordenados
+    const arrayLabels = combinedArray.map(item => item.fechaString);
+    const arrayData = combinedArray.map(item => item.valor);
 
-let arrayData = []
-    for (let i=0; i<combinedArray.length;i++){
-        arrayData.push(combinedArray[i].valor)
-    }
+    // Obtener los últimos 10 elementos
+    const ultimos10 = arrayLabels.slice(-10);
+    const ultimos10datos = arrayData.slice(-10);
 
-let ultimos10 = arrayLabels.slice(-10)
-let ultimos10datos = arrayData.slice(-10)
     if (ultimos10.length < 1) return;
+
+    // Crear el gráfico
     myChart1 = new Chart(ctz, {
-        type: 'line', // Tipo de gráfico: bar, line, pie, etc.
+        type: 'line', // Tipo de gráfico
         data: {
-            labels: arrayLabels, // Etiquetas en el eje X
+            labels: ultimos10, // Etiquetas en el eje X (últimos 10)
             datasets: [{
                 label: 'Valor (mg/dL) en el Mes Actual',
-                data: ultimos10datos, // Datos de cada barra
-                backgroundColor: 'black', // Color de fondo de las barras
-                borderColor: 'black', // Color del borde de las barras
+                data: ultimos10datos, // Datos de cada barra (últimos 10)
+                backgroundColor: 'black', // Color de fondo
+                borderColor: 'black', // Color del borde
                 borderWidth: 2
             }]
         },
         options: {
-            responsive: true, // Hacer el gráfico responsive
-        maintainAspectRatio: false, // Permitir cambiar la relación de aspecto
-        
-           plugins: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
                 annotation: {
                     annotations: {
                         highlight: {
                             type: 'box',
                             xMin: ultimos10[0],
-                            xMax: ultimos10[ultimos10.length -1],
-                            yMin: 180, // Valor del eje Y a partir del cual deseas cambiar el color
-yMax: 600, 
-                            
-                            backgroundColor: 'rgba(255, 99, 132, 0.5)', 
+                            xMax: ultimos10[ultimos10.length - 1],
+                            yMin: 180,
+                            yMax: 600,
+                            backgroundColor: 'rgba(255, 99, 132, 0.5)',
                             borderColor: 'rgba(255, 99, 132, 1)',
                             borderWidth: 1
-                        }, highlight2: {
+                        },
+                        highlight2: {
                             type: 'box',
                             xMin: ultimos10[0],
-                            xMax: ultimos10[ultimos10.length -1],
-                            yMin: 0, // Nivel más bajo
-                            yMax: 70, // Nivel más alto
+                            xMax: ultimos10[ultimos10.length - 1],
+                            yMin: 0,
+                            yMax: 70,
                             backgroundColor: 'rgba(80, 133, 188, 0.5)',
                             borderColor: 'rgba(80, 133, 188, 1)',
                             borderWidth: 1
-                        }, highlight3: {
+                        },
+                        highlight3: {
                             type: 'box',
                             xMin: ultimos10[0],
-                            xMax: ultimos10[ultimos10.length -1],
-                            yMin: 70, // Nivel más bajo
-                            yMax: 180, // Nivel más alto
+                            xMax: ultimos10[ultimos10.length - 1],
+                            yMin: 70,
+                            yMax: 180,
                             backgroundColor: 'rgba(0, 128, 0, 0.25)',
                             borderColor: 'rgba(0, 128, 0, 1)',
                             borderWidth: 1
@@ -337,22 +334,22 @@ yMax: 600,
                 }
             },
             scales: {
-x: {
-        min: ultimos10[0], // Establece xMin al primer elemento de ultimos10
-        max: ultimos10[ultimos10.length - 1], // Establece xMax al último elemento de ultimos10
-        // otras configuraciones si es necesario
-    },
+                x: {
+                    min: ultimos10[0],
+                    max: ultimos10[ultimos10.length - 1],
+                },
                 y: {
                     grid: {
-                        display: false  // Desactiva las líneas guías en el eje Y
+                        display: false
                     },
-max: 600,
-                    beginAtZero: true // Empieza el eje Y en cero
+                    max: 600,
+                    beginAtZero: true
                 }
             }
         }
     });
-    }
+}
+
 
 
     //////////////////////////////Eliminar Registros Antiguos////////////////////////////
