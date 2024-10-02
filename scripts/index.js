@@ -263,13 +263,14 @@ function tipo_grafica(mes){
     // Combinar fechaString y valor en un nuevo array
 const combinedArray = mes.map(item => ({
     fechaString: item.fechaString,
+    hora: item.hora,
     valor: item.valor,
 }));
 
 // Ordenar por fecha y hora
 combinedArray.sort((a, b) => {
-    const dateA = toDateTime(a.fechaString, hora); // Asegúrate de obtener la hora correspondiente
-    const dateB = toDateTime(b.fechaString, hora);
+    const dateA = toDateTime(a.fechaString, a.hora); // Asegúrate de obtener la hora correspondiente
+    const dateB = toDateTime(b.fechaString, b.hora);
     return dateB - dateA; // De más reciente a más antiguo
 });
 
