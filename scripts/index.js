@@ -278,7 +278,7 @@ combinedArray.sort((a, b) => {
 const arrayLabels = combinedArray.map(item => item.fechaString);
 
 let arrayData = []
-    for (let i=0; i<combined array.length;i++){
+    for (let i=0; i<combinedArray.length;i++){
         arrayData.push(combinedArray[i].valor)
     }
 
