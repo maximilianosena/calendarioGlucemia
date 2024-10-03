@@ -9,9 +9,9 @@ let fecha_Actual = new Date()
 const MESES = ["01", "02", "03", "04", "05", "06", "07",
     "08", "09", "10", "11", "12"]
 
-let mes_Actual = MESES[fecha_Actual.getMonth()]<10? `0${MESES[fecha_Actual.getMonth()]}`:MESES[fecha_Actual.getMonth()]
+let mes_Actual = MESES[fecha_Actual.getMonth()] < 10 ? `0${MESES[fecha_Actual.getMonth()]}` : MESES[fecha_Actual.getMonth()]
 let año_Actual = fecha_Actual.getFullYear()
-let numeroDia_Actual = fecha_Actual.getDate()<10? `0${fecha_Actual.getDate()}`:fecha_Actual.getDate()
+let numeroDia_Actual = fecha_Actual.getDate() < 10 ? `0${fecha_Actual.getDate()}` : fecha_Actual.getDate()
 
 let obj_fecha = `${numeroDia_Actual}-${mes_Actual}-${año_Actual}`
 
@@ -54,7 +54,7 @@ checkbox_now.addEventListener("change", () => {
 
         button_hecho.addEventListener("click", (e) => {
             e.preventDefault()
-            
+
             let fecha_comparativa = new Date(historial_Fecha.value)
             let fecha_Desglosada = historial_Fecha.value.split("-")
             let año_Historial = fecha_Desglosada[0]
@@ -62,16 +62,16 @@ checkbox_now.addEventListener("change", () => {
             let dia_Historial = fecha_Desglosada[2]
 
             let obj_fechaHistorial = `${dia_Historial}-${mes_Historial}-${año_Historial}`
-                let valor1 = historial_Hora.value[0]
-                let valor2 = historial_Hora.value[1]
-                let valor3 = historial_Hora.value[2]
-                let valor4 = historial_Hora.value[3]
-            
-            if (valor1 >2 || valor1 == 2 && valor2 >3 || valor3 > 5) {
-                alert ("Inserte un horario válido")
+            let valor1 = historial_Hora.value[0]
+            let valor2 = historial_Hora.value[1]
+            let valor3 = historial_Hora.value[2]
+            let valor4 = historial_Hora.value[3]
+
+            if (valor1 > 2 || valor1 == 2 && valor2 > 3 || valor3 > 5) {
+                alert("Inserte un horario válido")
             }
-             else if (historial_Hora.value.length == 4 && !isNaN(historial_Hora.value)) {
-               
+            else if (historial_Hora.value.length == 4 && !isNaN(historial_Hora.value)) {
+
 
                 let hora = `${valor1}${valor2}`
                 let minutos = `${valor3}${valor4}`
@@ -80,7 +80,7 @@ checkbox_now.addEventListener("change", () => {
 
                 localStorage.setItem("hora", JSON.stringify(obj_horaHistorial))
             } else if (historial_Hora.value.length > 4 && historial_Hora.value.includes(":")) {
-              
+
 
                 let hora = `${valor1}${valor2}`
                 let minutos = `${valor3}${valor4}`
@@ -175,10 +175,10 @@ button_submit.addEventListener("submit", async (e) => {
                     location.reload()
                 }, 1500)
             } else {
-                
-                    console.error('Error en la solicitud:', response.status, await response.text());
-                }
-        
+
+                console.error('Error en la solicitud:', response.status, await response.text());
+            }
+
         } catch (error) {
             console.error('Error al hacer la solicitud:', error);
         }
@@ -197,8 +197,8 @@ function mostrarToast() {
 function errorToast() {
     var miToast = document.getElementById('miNOToast');
     var cartel = new bootstrap.Toast(miToast);
-        cartel.show();
-    }
+    cartel.show();
+}
 
 
 
@@ -215,33 +215,52 @@ async function getValores() {
 
         if (response.ok) {
             const result = await response.json();
-            console.log(result);       
-            let ultimo = result[result.length - 1].fecha;
-            let ultimo_corte = ultimo.split("-");
-            let ultimo_mes = ultimo_corte[1];
-
-            if (mes_Actual !== ultimo_mes) {
-alert("Son meses distintos")
-                console.log(ultimo_mes);
-                console.log(mes_Actual);
-                let email = localStorage.getItem("user");
-                email_registrosMensuales(email);
-            }
-if (numeroDia_Actual==="02"){
-alert("hoy es 2")
-}
-tipo_grafica(result);
+            console.log(result);
+            tipo_grafica(result);
         }
     } catch (e) {
         console.error("Error: ", e);
     }
 }
 
+
+
+///////////////////////Mandar Mail Mensual/////////////////////////////
+
+async function sendMailMensual() {
+    try {
+        let token = localStorage.getItem("token")
+        const userId = localStorage.getItem('id')
+        const response = await fetch(`https://backend-glucemia.vercel.app/all?userId=${userId}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+
+        if (response.ok) {
+            const result = await response.json();
+            console.log(result);
+            let ultimo = result[result.length - 1].fecha;
+            let ultimo_corte = ultimo.split("-");
+            let ultimo_mes = ultimo_corte[1];
+
+            if (mes_Actual !== ultimo_mes) {
+                let email = localStorage.getItem("user");
+                email_registrosMensuales(email);
+            } 
+        }
+    } catch (e) {
+        console.error("Error: ", e);
+    }
+}
+
+sendMailMensual()
 ///////////////////////Cerrar Sesión///////////////////////////////////
 
 let btn_close = document.getElementById("close")
 
-btn_close.addEventListener("click", ()=>{
+btn_close.addEventListener("click", () => {
     localStorage.clear()
     location.reload()
 })
@@ -249,7 +268,7 @@ btn_close.addEventListener("click", ()=>{
 /////////////////////////Grafica Mes Actual/////////////////////
 
 const ctz = document.getElementById('myChart1').getContext('2d');
-let myChart1; 
+let myChart1;
 
 function toDateTime(fecha, hora) {
     const [day, month, year] = fecha.split('-').map(Number);
@@ -354,42 +373,42 @@ function tipo_grafica(mes) {
 
 
 
-    //////////////////////////////Eliminar Registros Antiguos////////////////////////////
+//////////////////////////////Eliminar Registros Antiguos////////////////////////////
 
-    async function eliminarRegistrosAntiguos() {
-        try {
-          const response = await fetch('/delete-old', {
+async function eliminarRegistrosAntiguos() {
+    try {
+        const response = await fetch('/delete-old', {
             method: 'DELETE',
             headers: {
-              'Content-Type': 'application/json',
+                'Content-Type': 'application/json',
             },
-          });
-      
-          if (!response.ok) {
+        });
+
+        if (!response.ok) {
             const errorData = await response.json();
             throw new Error(errorData.message);
-          }
-      
-          const data = await response.json();
-          console.log(data.message); // Mensaje de éxito
-        } catch (error) {
-          console.error('Error al eliminar registros:', error.message);
         }
-      }
-      
-      
-      eliminarRegistrosAntiguos();
-      
-      
-    async function email_registrosMensuales(email) {
 
-        const rangoNormal = localStorage.getItem("normal")
-        const rangoAlto = localStorage.getItem("alto")
-        const rangoBajo = localStorage.getItem("bajo")
-        const valores = localStorage.getItem("nivelGlucosa")
-        const subject = "Informe mensual"
-        let token = localStorage.getItem("token")
-        const message = ` <html>
+        const data = await response.json();
+        console.log(data.message); // Mensaje de éxito
+    } catch (error) {
+        console.error('Error al eliminar registros:', error.message);
+    }
+}
+
+
+eliminarRegistrosAntiguos();
+
+
+async function email_registrosMensuales(email) {
+
+    const rangoNormal = localStorage.getItem("normal")
+    const rangoAlto = localStorage.getItem("alto")
+    const rangoBajo = localStorage.getItem("bajo")
+    const valores = localStorage.getItem("nivelGlucosa")
+    const subject = "Informe mensual"
+    let token = localStorage.getItem("token")
+    const message = ` <html>
             <body style="font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px;">
                 <div style="max-width: 600px; margin: auto; background: rgb(21, 184, 162);; padding: 20px; border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
                     <h1 style="color: #e7e4e4;text-align: center;">¡Hola!</h1>
@@ -409,42 +428,42 @@ function tipo_grafica(mes) {
                 </div>
             </body>
         </html>`
-        try {
-            const response = await fetch('https://backend-glucemia.vercel.app/send-email-mensual', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                },
-                body: JSON.stringify({ email, subject, message })
-            });
-    
-            if (!response.ok) {
-                const errorText = await response.text();
-                console.error('Error al enviar el correo:', errorText);
-               
-                return;
-            }
-    
-            const result = await response.json();
-            if (result.success) {
-                console.log('Email enviado!');
-            } else {
-                console.log('Error al enviar el email');
-            }
-    
-        } catch (error) {
-            console.error('Error al enviar el correo:', error);
-            
-        }
-    }
-    
+    try {
+        const response = await fetch('https://backend-glucemia.vercel.app/send-email-mensual', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ email, subject, message })
+        });
 
-    async function email_bienvenida(email, alias) {
-        let token = localStorage.getItem("token")
-        const subject = "Bienvenido a su calendario Glucémico"
-    
-        const message = ` <html>
+        if (!response.ok) {
+            const errorText = await response.text();
+            console.error('Error al enviar el correo:', errorText);
+
+            return;
+        }
+
+        const result = await response.json();
+        if (result.success) {
+            console.log('Email enviado!');
+        } else {
+            console.log('Error al enviar el email');
+        }
+
+    } catch (error) {
+        console.error('Error al enviar el correo:', error);
+
+    }
+}
+
+
+async function email_bienvenida(email, alias) {
+    let token = localStorage.getItem("token")
+    const subject = "Bienvenido a su calendario Glucémico"
+
+    const message = ` <html>
             <body style="font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px;">
                 <div style="max-width: 600px; margin: auto; background: rgb(21, 184, 162);; padding: 20px; border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
                     <h1 style="color: #e7e4e4;text-align: center;">¡Bienvenido!</h1>
@@ -463,49 +482,49 @@ function tipo_grafica(mes) {
                 </div>
             </body>
         </html>`
-        try {
-            const response = await fetch('https://backend-glucemia.vercel.app/send-email', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                },
-                body: JSON.stringify({ email, subject, message })
-            });
-    
-            if (!response.ok) {
-                const errorText = await response.text();
-                console.error('Error al enviar el correo:', errorText);
-                
-                return;
-            }
-    
-            const result = await response.json();
-            if (result.success) {
-                console.log('Email enviado!');
-            } else {
-                console.log('Error al enviar el email');
-            }
-    
-        } catch (error) {
-            console.error('Error al enviar el correo:', error);
-            
-        }
-    }
+    try {
+        const response = await fetch('https://backend-glucemia.vercel.app/send-email', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ email, subject, message })
+        });
 
-    
-document.addEventListener('DOMContentLoaded', function () {
-    
-        const primerVez = localStorage.getItem('primeraVez');
-    
-        if (primerVez === "true") {
-            let email = localStorage.getItem("email");
-            let alias = localStorage.getItem("alias");
-            email_bienvenida(email, alias);
-            localStorage.setItem('primeraVez', "false");
+        if (!response.ok) {
+            const errorText = await response.text();
+            console.error('Error al enviar el correo:', errorText);
+
+            return;
+        }
+
+        const result = await response.json();
+        if (result.success) {
+            console.log('Email enviado!');
         } else {
+            console.log('Error al enviar el email');
+        }
+
+    } catch (error) {
+        console.error('Error al enviar el correo:', error);
+
+    }
+}
+
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    const primerVez = localStorage.getItem('primeraVez');
+
+    if (primerVez === "true") {
+        let email = localStorage.getItem("email");
+        let alias = localStorage.getItem("alias");
+        email_bienvenida(email, alias);
+        localStorage.setItem('primeraVez', "false");
+    } else {
         console.log("Ya ingresó")
     }
-    
+
 })
 
