@@ -50,7 +50,7 @@ async function borrarCuenta() {
       return;
   } 
   console.log(token)
-    fetch(`https://backend-glucemia.vercel.app/borrar_Perfil?userId=${userId}`, {
+    fetch(`https://backend-glucemia.vercel.app/borrar_Perfil`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`, 
