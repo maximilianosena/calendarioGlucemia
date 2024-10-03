@@ -5,7 +5,7 @@
 async function getValores() {
     try {
         let token = localStorage.getItem("token")
-        const userId = localStorage.getItem('user')
+        const userId = localStorage.getItem('id')
         const response = await fetch(`https://backend-glucemia.vercel.app/perfil?email=${userId}`, {
             method: 'GET',
             headers: {
@@ -43,7 +43,7 @@ async function showPerfil(datos){
 
 async function borrarCuenta() {
     let token = localStorage.getItem("token")
-    const userId = localStorage.getItem('user')
+    const userId = localStorage.getItem('id')
     fetch(`https://backend-glucemia.vercel.app/borrar_Perfil?email=${userId}`, {
         method: 'DELETE',
         headers: {
