@@ -12,7 +12,7 @@
    
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">INICIO</a>
+          <a class="navbar-brand" href="index.html">INICIO</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -34,6 +34,10 @@
                         <a class="nav-link" href="https://maximilianosena.github.io/pancrealculator/" target="_blank">Calculadora de Carbohidrados</a>
                     </li>
                     
+                    <li class="nav-item">
+                        <a class="nav-link" href="perfil.html">Mi Perfil</a>
+                    </li>
+
                     <li class="nav-item">
                         <button id="close" type="button" class="btn btn-outline-danger nav-link">Cerrar Sesión</button>
                     </li>
@@ -99,13 +103,15 @@
         <canvas id="myChart1"></canvas>
     </div>
     <div class="item" style="text-align: center;">
-        <h3>Tiempo en Rango (%)</h3>
-      <!--  <canvas id="myPieChart"></canvas> -->
- <p id="tiempoRango"> </p>
+        <h3>Tiempo en Rango (%) Mensual</h3>
+      
+ <ul id="tiempoRango"> </ul>
     </div>
     <div class="item" id="promedioValores" style="text-align: center;">
         <h3 style="padding-top: 5%;">Promedio Valores</h3>
+        <h5>Mes Actual</h5>
         <p id="promedio"></p>
+        <hr>
         <p id="glicosilada"></p>
     </div>
 </div>

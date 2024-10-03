@@ -111,7 +111,7 @@ function promedioValores(dato) {
     let valorPromedioBajo = (abajo.length / dato.valor.length * 100).toFixed(2)
     let valorPromedioNormal = (normal.length / dato.valor.length * 100).toFixed(2)
 
-rango.innerHTML += `<span> Rango alto: ${valorPromedioAlto}%  En Rango: ${valorPromedioNormal}% Por debajo del Rango: ${valorPromedioBajo}%<\span>`
+rango.innerHTML += `<li class="li_promedio"> <em>Por encima del Rango: ${valorPromedioAlto}% </em></li> <li class="li_promedio"> <em>En Rango: ${valorPromedioNormal}% </em></li> <li class="li_promedio"><em>Por debajo del Rango: ${valorPromedioBajo}% </em></li>`
     
 }
 
@@ -150,9 +150,16 @@ function hemoglobina(año) {
 
     let result_hemoglobina = cantidad > 0 ? (((valores / cantidad) + 46.7) / 28.7) : 0
     let final = result_hemoglobina.toFixed(2)
-    hemoglobina_glicosilada.innerHTML += `<h6>La hemoglobina Glicosilada es de ${result_hemoglobina > 0 ? final : 0}%<h6> <br>
-   <figure> <figcaption class="blockquote-footer"><p>Este dato tomará fiabilidad al recibir datos de al menos los últimos 2 o 3 meses.<p></figcaption> </figure>
-    <br>`
+    hemoglobina_glicosilada.innerHTML += `
+    <h5>La hemoglobina Glicosilada es de ${result_hemoglobina > 0 ? final : 0}%</h5>
+    <br>
+    <p> <small> Este dato tomará fiabilidad al recibir datos de al menos los últimos 2 o 3 meses. </small></p>
+    <div class="aviso"> Ver Mas
+        <span class="explicacion">El porcentaje resulta de la recopilación de todos los registros que 
+        haga dentro de un trimestre </span>
+    </div>
+    <br>
+`;
 }
 
 
