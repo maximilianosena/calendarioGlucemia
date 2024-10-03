@@ -5,8 +5,8 @@
 async function getValores() {
     try {
         let token = localStorage.getItem("token")
-        const userId = localStorage.getItem('id')
-        const response = await fetch(`https://backend-glucemia.vercel.app/perfil?userId=${userId}`, {
+        const email = localStorage.getItem('user')
+        const response = await fetch(`https://backend-glucemia.vercel.app/perfil?email=${email}`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`
