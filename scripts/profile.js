@@ -84,18 +84,20 @@ async function borrarCuenta() {
 
 const myToast = new bootstrap.Toast(document.getElementById('myToast'));
 
-document.getElementById("btn_toast").addEventListener("click",()=>{
-    myToast.show()
+document.getElementById("btn_toast").addEventListener("click", () => {
+    myToast.show();
+    
     document.getElementById('precaucion').addEventListener('click', function () {
-    const btn_borrar = document.getElementById('btn_borrar')
+        const btn_borrar = document.getElementById('btn_borrar');
 
-    if(btn_borrar){
-    btn_borrar.addEventListener('click', function () {
-    borrarCuenta()
-}
-})} 
-})
-})
+        if (btn_borrar) {
+            btn_borrar.addEventListener('click', function () {
+                borrarCuenta();
+            });
+        }
+    });
+});
+
 
 
 
