@@ -55,13 +55,11 @@ async function borrarCuenta() {
         headers: {
           'Authorization': `Bearer ${token}`, 
           'Content-Type': 'application/json'
-        }, 
-        body: JSON.stringify({ password: localStorage.getItem("password") })
+        }
       })
       .then(response => {
         if (!response.ok) {  // Verifica si la respuesta es OK
           return response.json().then(data => {
-            console.log(localStorage.getItem("password"))
             throw new Error(data.error || 'Error al eliminar la cuenta');
           });
         }
@@ -71,7 +69,10 @@ async function borrarCuenta() {
         if (data.mensaje) {
           console.log(data.mensaje);
           alert("Cuenta eliminada");
-          
+          setTimeout(() => {
+        localStorage.clear();
+        location.reload();
+      }, 2000); 
         }
       })
       .catch(error => {
@@ -90,12 +91,6 @@ document.getElementById("btn_toast").addEventListener("click",()=>{
 
     if(btn_borrar){
     btn_borrar.addEventListener('click', function () {
-    let input_contraseña = document.getElementById("password")
-    let contraseña = input_contraseña.value.trim()
-    if(contraseña===""){
-        alert("Digite la contraseña por favor")
-    } else {
-    localStorage.setItem("password", contraseña)
     borrarCuenta()
 }
 })} 
