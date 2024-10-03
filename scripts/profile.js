@@ -44,13 +44,13 @@ async function showPerfil(datos){
 async function borrarCuenta() {
   let token = localStorage.getItem("token");
   const userId = localStorage.getItem('id');
-
+          
   if (!token || !userId) {
       alert('Token o userId no encontrados.');
       return;
   } 
   console.log(token)
-    fetch(`https://backend-glucemia.vercel.app/borrar_Perfil`, {
+    fetch(`https://backend-glucemia.vercel.app/borrar_Perfil?userId=${userId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`, 
