@@ -96,9 +96,11 @@ async function deleteRegistro(id) {
 }
 
 function color_row(valor){
-    if (valor > 180 || valor < 70){
+    if (valor > 180 ){
         return("table-danger")
-    } else {
+    } else if (valor < 70) {
+return ("table-primary") 
+} else {
         return("table-success")
     }
 
