@@ -82,31 +82,57 @@ return ("table-primary")
 
 }
 
+
 let checkAlto = document.getElementById("checkAlto")
 let checkBajo = document.getElementById("checkBajo")
 let checkNormal = document.getElementById("checkNormal")
 let checkTodos = document.getElementById("todos")
 
-
 let arrayResultados =[]
 
-if (checkBajo.checked) {
-    
-} else if
-    (checkAlto.checked) {
-    
-} else if (checkNormal.checked)
-{
-    
-} 
+document.addEventListener("DOMContentLoaded",()=>{
+checkAlto.addEventListener("click",()=>{ 
+        let arrayAlto = []
+        container_registros.innerHTML =``
+        
+        for (let i=0; i<arrayResultados[0].length ; i++){
+            if (arrayResultados[0][i].valor > 180) {
+                arrayAlto.push(arrayResultados[0][i])
+            }
+        }
+        view_resultados(arrayAlto)
+    })
 
 
-if (checkTodos.checked) {
-    
-} else if (valorMin !== undefined && valorMax !== undefined) {
-    
-}
+    checkBajo.addEventListener("click",()=>{ 
+        let arrayBajo = []
+        container_registros.innerHTML =``
+        
+        for (let i=0; i<arrayResultados[0].length ; i++){
+            if (arrayResultados[0][i].valor < 70) {
+                arrayBajo.push(arrayResultados[0][i])
+            }
+        }
+        view_resultados(arrayBajo)
+    })
 
+    checkNormal.addEventListener("click",()=>{ 
+        let arrayNormal = []
+        container_registros.innerHTML =``
+        
+        for (let i=0; i<arrayResultados[0].length ; i++){
+            if (arrayResultados[0][i].valor >= 70 && arrayResultados[0][i].valor <= 180  ) {
+                arrayNormal.push(arrayResultados[0][i])
+            }
+        }
+        view_resultados(arrayNormal)
+    })
+
+    checkTodos.addEventListener("click",()=>{ 
+        container_registros.innerHTML =``
+        getValores()
+    })
+})
 
 async function getValores() {
     try {
@@ -121,9 +147,11 @@ async function getValores() {
 
 
         if (response.ok) {
+            
             const result = await response.json()
             console.log(result)
             arrayResultados.push(result)
+            console.log(arrayResultados[0][2].valor)
             view_resultados(result)
         }
     }
