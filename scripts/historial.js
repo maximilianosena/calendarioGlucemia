@@ -129,8 +129,12 @@ checkAlto.addEventListener("click",()=>{
     })
 
     checkTodos.addEventListener("click",()=>{ 
+        let arrayTodos = []
         container_registros.innerHTML =``
-        getValores()
+for (let i=0; i<arrayResultados[0].length ; i++){
+arrayTodos.push(arrayResultados[0][i])
+            }
+        view_resultados(arrayTodos)
     })
 })
 
