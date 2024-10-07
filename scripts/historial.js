@@ -88,24 +88,23 @@ let checkNormal = document.getElementById("checkNormal")
 let checkTodos = document.getElementById("todos")
 
 
-let valorMin, valorMax;
-let queryString = ''
+let arrayResultados =[]
 
 if (checkBajo.checked) {
-    const [valorMin, valorMax] = checkBajo.value.split('-')
+    
 } else if
     (checkAlto.checked) {
-    const [valorMin, valorMax] = checkAlto.value.split('-')
+    
 } else if (checkNormal.checked)
 {
-    const [valorMin, valorMax] = checkNormal.value.split('-')
+    
 } 
 
 
 if (checkTodos.checked) {
-    queryString = ''; // No se necesita query string para "todos"
+    
 } else if (valorMin !== undefined && valorMax !== undefined) {
-    queryString = `?valorMin=${valorMin}&valorMax=${valorMax}`;
+    
 }
 
 
@@ -113,7 +112,7 @@ async function getValores() {
     try {
         let token = localStorage.getItem("token")
         const userId = localStorage.getItem('id')
-        const response = await fetch(`https://backend-glucemia.vercel.app/all?userId=${userId}${queryString}`, {
+        const response = await fetch(`https://backend-glucemia.vercel.app/all?userId=${userId}`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -124,6 +123,7 @@ async function getValores() {
         if (response.ok) {
             const result = await response.json()
             console.log(result)
+            arrayResultados.push(result)
             view_resultados(result)
         }
     }
