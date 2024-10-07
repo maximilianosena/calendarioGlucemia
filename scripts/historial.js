@@ -4,8 +4,30 @@
 /////////////////////////Valores al inicio////////////////////
 let container_registros = document.getElementById("container_registros")
 
-/*
-*/
+async function getValores() {
+    try {
+        let token = localStorage.getItem("token")
+        const userId = localStorage.getItem('id')
+        const response = await fetch(`https://backend-glucemia.vercel.app/all?userId=${userId}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+
+
+        if (response.ok) {
+            const result = await response.json()
+            console.log(result)
+            view_resultados(result)
+        }
+    }
+    catch (e) {
+        console.error("Error: ", e)
+    }
+
+}
+getValores()
 
 function toDateTime(fecha, hora) {
     const [day, month, year] = fecha.split('-').map(Number);
@@ -73,11 +95,14 @@ async function deleteRegistro(id) {
 
 }
 
-function color_row(valor) {
-    if (valor > 180 || valor < 70) {
-        return ("table-danger")
-    } else {
-        return ("table-success")
+
+function color_row(valor){
+    if (valor > 180 ){
+        return("table-danger")
+    } else if (valor < 70) {
+return ("table-primary") 
+} else {
+        return("table-success")
     }
 
 }

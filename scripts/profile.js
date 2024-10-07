@@ -44,24 +44,22 @@ async function showPerfil(datos){
 async function borrarCuenta() {
   let token = localStorage.getItem("token");
   const userId = localStorage.getItem('id');
-
+          
   if (!token || !userId) {
       alert('Token o userId no encontrados.');
       return;
   } 
   console.log(token)
-    fetch(`https://backend-glucemia.vercel.app/borrar_Perfil`, {
+    fetch(`https://backend-glucemia.vercel.app/borrar_Perfil?userId=${userId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`, 
           'Content-Type': 'application/json'
-        }, 
-        body: JSON.stringify({ password: localStorage.getItem("password") })
+        }
       })
       .then(response => {
         if (!response.ok) {  // Verifica si la respuesta es OK
           return response.json().then(data => {
-            console.log(localStorage.getItem("password"))
             throw new Error(data.error || 'Error al eliminar la cuenta');
           });
         }
@@ -71,7 +69,10 @@ async function borrarCuenta() {
         if (data.mensaje) {
           console.log(data.mensaje);
           alert("Cuenta eliminada");
-          
+          setTimeout(() => {
+        localStorage.clear();
+        location.reload();
+      }, 2000); 
         }
       })
       .catch(error => {
@@ -83,24 +84,20 @@ async function borrarCuenta() {
 
 const myToast = new bootstrap.Toast(document.getElementById('myToast'));
 
-document.getElementById("btn_toast").addEventListener("click",()=>{
-    myToast.show()
+document.getElementById("btn_toast").addEventListener("click", () => {
+    myToast.show();
+    
     document.getElementById('precaucion').addEventListener('click', function () {
-    const btn_borrar = document.getElementById('btn_borrar')
+        const btn_borrar = document.getElementById('btn_borrar');
 
-    if(btn_borrar){
-    btn_borrar.addEventListener('click', function () {
-    let input_contraseña = document.getElementById("password")
-    let contraseña = input_contraseña.value.trim()
-    if(contraseña===""){
-        alert("Digite la contraseña por favor")
-    } else {
-    localStorage.setItem("password", contraseña)
-    borrarCuenta()
-}
-})} 
-})
-})
+        if (btn_borrar) {
+            btn_borrar.addEventListener('click', function () {
+                borrarCuenta();
+            });
+        }
+    });
+});
+
 
 
 
