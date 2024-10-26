@@ -97,9 +97,9 @@ function toDateTime(fecha, hora) {
     
         for (let i in array) {
             container.innerHTML += ` <tr style="text-align: center;">
-                <td>${array[i].fechaString}</td>
-                 <td>${array[i].hora}</td>
-                    <td>${array[i].tipo}</td>
+                <td>${array[i].tipo}</td>
+                 <td>${array[i].fechaString}</td>
+                    <td>${array[i].hora}</td>
                      <td><button id=${array[i].tipo} name="actualizar" class="btn btn-info">Actualizar</button></td>  
                       <td><button id=${array[i].id} name="borrar" class="btn btn-danger">X</button></td>        
             </tr>`
