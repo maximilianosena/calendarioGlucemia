@@ -96,13 +96,32 @@ function toDateTime(fecha, hora) {
         });
     
         for (let i in array) {
-            container.innerHTML += ` <tr>
+            container.innerHTML += ` <tr style="text-align: center;">
                 <td>${array[i].fechaString}</td>
                  <td>${array[i].hora}</td>
                     <td>${array[i].tipo}</td>
-                     <td><button id=${array[i].id} name="actualizar">Actualizar</button></td>         
+                     <td><button id=${array[i].tipo} name="actualizar" class="btn btn-info">Actualizar</button></td>  
+                      <td><button id=${array[i].id} name="borrar" class="btn btn-danger">X</button></td>        
             </tr>`
         }
+
+        container.addEventListener('click', (event) => {
+            if (event.target.name === 'actualizar') {
+                const tipo = event.target.id;  // Obtenemos el id del botón
+                console.log("Hago click en id: ", tipo);
+                console.log(`URL de la solicitud: https://backend-glucemia.vercel.app/actualizarPastilla/${tipo}`);
+                actualizarRegistro(tipo);
+            }
+        })
+
+        container.addEventListener('click', (event) => {
+            if (event.target.name === 'borrar') {
+                const id = event.target.id;  // Obtenemos el id del botón
+                console.log("Hago click en id: ", id);
+    
+                deleteRegistro(id);
+            }
+            })
         }
 
     let arrayResultados =[]
@@ -130,6 +149,71 @@ function toDateTime(fecha, hora) {
         catch (e) {
             console.error("Error: ", e)
         }
+    
+    }
+
+    async function actualizarRegistro(tipo) {
+
+        let fechaComparativa = new Date(JSON.parse(localStorage.getItem("fechaComparativa")));
+        let nuevo_registro = {
+            fecha: fechaComparativa,
+            fechaString: JSON.parse(localStorage.getItem("fechaPasti")),
+            hora: JSON.parse(localStorage.getItem("horaPasti"))
+        };
+        console.log(nuevo_registro)
+        try {
+            let token = localStorage.getItem("token")
+            const response = await fetch(`https://backend-glucemia.vercel.app/actualizarPastilla/${tipo}`, {
+                method: 'PUT',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(nuevo_registro),
+            });
+           
+    
+            if (response.ok) {
+                const result = await response.json();
+                console.log('Respuesta del servidor:', result);
+                setTimeout(() => {
+                    location.reload()
+                }, 1000)
+            } else {
+                console.error('Error en la solicitud:', response.status);
+            }
+        } catch (error) {
+            console.error('Error al hacer la solicitud:', error);
+        }
+    
+    
+    }
+
+    async function deleteRegistro(id) {
+
+        try {
+            let token = localStorage.getItem("token")
+            const response = await fetch(`https://backend-glucemia.vercel.app/borrar_Pasti/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+    
+            if (response.ok) {
+                const result = await response.json();
+                console.log('Respuesta del servidor:', result);
+                setTimeout(() => {
+                    location.reload()
+                }, 1000)
+            } else {
+                console.error('Error en la solicitud:', response.status);
+            }
+        } catch (error) {
+            console.error('Error al hacer la solicitud:', error);
+        }
+    
     
     }
     getValores()
