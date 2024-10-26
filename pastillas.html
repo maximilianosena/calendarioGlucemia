@@ -47,9 +47,28 @@
       </nav>
       <hr>
 <div class="container">
+    <div class="mb-3">
+        <label for="pastilla">Nombre Pastilla: </label>
+        <input type="text" id="pastilla">
+        <button type="submit" id="submit" class="btn btn-primary" style="text-align: center;">Enviar</button>
+    </div>
+    <div class="mb-3">
+        <table class="table table-striped">
+            <thead style="text-align: center;">
+            <tr>
+                <th class="table-primary">Pastilla</th>
+                <th class="table-primary">Fecha</th>
+                <th class="table-primary">Hora Última vez</th>
+            </tr>
+        </thead>
+    <tbody id="registro_pastilla">
     
+    </tbody>
+    </table>
+    </div>
 </div>
     <script src="scripts/init.js"></script>
+    <script src="scripts/pastilla.js"></script>
     
 
    
