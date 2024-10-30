@@ -34,10 +34,8 @@ async function loadPage(page) {
    const data = await getValores(page, limit)
    if (data){
             currentPage = page
-            arrayResultados.push(data.registros)
-            console.log(arrayResultados[0][2].valor)
             container_registros.innerHTML =""
-            view_resultados(data.registros)
+            view_resultados(data.insulinas)
 } else {
     alert("Última página")
 }
@@ -86,7 +84,7 @@ array.sort((a, b) => {
              <td>${array[i].hora}</td>
               <td>${array[i].unidades}</td>
               <td>${array[i].tipo}</td>
-               <td>${array[i].momento}</td>
+               <td>${array[i].momento==="Pre Desayuno"?"Ayunas":array[i].momento}</td>
                 <td>${array[i].notas}</td>
                  <td><button id=${array[i].id} name="borrar">X</button></td>         
         </tr>`
