@@ -217,3 +217,10 @@ function toDateTime(fecha, hora) {
     
     }
     getValores()
+
+    let btn_close = document.getElementById("close")
+
+btn_close.addEventListener("click", () => {
+    localStorage.clear()
+    location.reload()
+})

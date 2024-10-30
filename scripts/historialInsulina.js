@@ -128,3 +128,10 @@ async function deleteRegistro(id) {
 
 
 }
+
+let btn_close = document.getElementById("close")
+
+btn_close.addEventListener("click", () => {
+    localStorage.clear()
+    location.reload()
+})

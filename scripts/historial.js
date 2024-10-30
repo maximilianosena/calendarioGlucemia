@@ -200,3 +200,10 @@ document.getElementById("anterior").addEventListener("click", ()=>{
 document.getElementById("siguiente").addEventListener("click", ()=>{
     nextPage()
 })
+
+let btn_close = document.getElementById("close")
+
+btn_close.addEventListener("click", () => {
+    localStorage.clear()
+    location.reload()
+})

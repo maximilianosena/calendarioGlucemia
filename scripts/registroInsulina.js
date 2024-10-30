@@ -203,3 +203,10 @@ var miToast = document.getElementById('miNOToast');
 var cartel = new bootstrap.Toast(miToast);
     cartel.show();
 }
+
+let btn_close = document.getElementById("close")
+
+btn_close.addEventListener("click", () => {
+    localStorage.clear()
+    location.reload()
+})
