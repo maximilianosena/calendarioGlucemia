@@ -2,11 +2,11 @@
 /////////////////////////Valores al inicio////////////////////
 let container_registros = document.getElementById("container_insulina")
 
-async function getValores() {
+async function getValores(page, limit) {
     try {
         let token = localStorage.getItem("token")
         const userId = localStorage.getItem('id')
-        const response = await fetch(`https://backend-glucemia.vercel.app/insulina?userId=${userId}`, {
+        const response = await fetch(`https://backend-glucemia.vercel.app/insulina?userId=${userId}&page=${page}&limit=${limit}`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -17,7 +17,7 @@ async function getValores() {
         if (response.ok) {
             const result = await response.json()
             console.log(result)
-            view_resultados(result)
+            return result
         }
     }
     catch (e) {
@@ -25,7 +25,44 @@ async function getValores() {
     }
 
 }
-getValores()
+
+
+let currentPage = 1
+const limit = 15
+
+async function loadPage(page) {
+   const data = await getValores(page, limit)
+   if (data){
+            currentPage = page
+            arrayResultados.push(data.registros)
+            console.log(arrayResultados[0][2].valor)
+            container_registros.innerHTML =""
+            view_resultados(data.registros)
+} else {
+    alert("Última página")
+}
+}
+
+
+function nextPage(){
+    loadPage(currentPage + 1)
+}
+
+function previousPage(){
+    if(currentPage>1){
+        loadPage(currentPage - 1)
+    }
+}
+
+loadPage(currentPage)
+
+document.getElementById("anterior").addEventListener("click", ()=>{
+    previousPage()
+})
+
+document.getElementById("siguiente").addEventListener("click", ()=>{
+    nextPage()
+})
 
 function toDateTime(fecha, hora) {
     const [day, month, year] = fecha.split('-').map(Number);
