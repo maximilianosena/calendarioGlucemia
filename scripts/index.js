@@ -259,7 +259,11 @@ let fechaMail=localStorage.getItem("fecha")
 let dia1 = fechaMail.split("-")
 
 console.log(dia1[0])
-sendMailMensual()
+
+if(dia1[0]===`"02`){
+    console.log("Hoy es 2")
+}
+//sendMailMensual()
 ///////////////////////Cerrar Sesión///////////////////////////////////
 
 let btn_close = document.getElementById("close")
