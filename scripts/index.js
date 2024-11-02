@@ -255,6 +255,10 @@ async function sendMailMensual() {
     }
 }
 
+let fechaMail=localStorage.getItem("fecha")
+let dia1 = fechaMail.split("-")
+
+console.log(dia1[0])
 sendMailMensual()
 ///////////////////////Cerrar Sesión///////////////////////////////////
 
