@@ -110,7 +110,7 @@ function promedioValores(dato) {
     let valorPromedioBajo = (abajo.length / dato.valor.length * 100).toFixed(2)
     let valorPromedioNormal = (normal.length / dato.valor.length * 100).toFixed(2)
 
-rango.innerHTML += `<li class="li_promedio"> <em>Por encima del Rango: ${valorPromedioAlto}% </em></li> <li class="li_promedio"> <em>En Rango: ${valorPromedioNormal}% </em></li> <li class="li_promedio"><em>Por debajo del Rango: ${valorPromedioBajo}% </em></li>`
+rango.innerHTML += `<li class="li_promedio"> <em>Por encima del Rango: ${isNaN(valorPromedioAlto)?0:valorPromedioAlto}% </em></li> <li class="li_promedio"> <em>En Rango: ${isNaN(valorPromedioNormal)?0:valorPromedioNormal}% </em></li> <li class="li_promedio"><em>Por debajo del Rango: ${isNaN(valorPromedioBajo)?0:valorPromedioBajo}% </em></li>`
     
 }
 
