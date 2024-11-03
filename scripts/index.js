@@ -258,10 +258,10 @@ async function sendMailMensual() {
 let fechaMail=localStorage.getItem("fecha")
 let dia1 = fechaMail.split("-")
 
-console.log(dia1[0])
+console.log("Hoy es", dia1[0])
 
 
-if (dia1[0] === `"02`) {
+if (dia1[0] === `"01`) {
     if (localStorage.getItem("correoEnviado") !== "true") {
         console.log("Hoy es 1, enviando correo");
         sendMailMensual(); 
