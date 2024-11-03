@@ -261,7 +261,7 @@ let dia1 = fechaMail.split("-")
 console.log("Hoy es", dia1[0])
 
 
-if (dia1[0] === `"01`) {
+if (dia1[0] === `"02`) {
     if (localStorage.getItem("correoEnviado") !== "true") {
         console.log("Hoy es 1, enviando correo");
         sendMailMensual(); 
