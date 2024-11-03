@@ -260,16 +260,15 @@ let dia1 = fechaMail.split("-")
 
 console.log(dia1[0])
 
-if(dia1[0]===`"02`){
-    localStorage.setItem("primerDia", "true")
-} else {
-    localStorage.setItem("primerDia", "false")
-}
 
-if(dia1[0]===`"02` && localStorage.getItem("primerDia")==="true"){
-    console.log("Hoy es 2")
-    console.log(localStorage.getItem("primerDia"))
-    sendMailMensual()
+if (dia1[0] === `"02`) {
+    if (localStorage.getItem("correoEnviado") !== "true") {
+        console.log("Hoy es 1, enviando correo");
+        sendMailMensual(); 
+        localStorage.setItem("correoEnviado", "true"); 
+    }
+} else {
+    localStorage.setItem("correoEnviado", "false");
 }
 
 ///////////////////////Cerrar Sesión///////////////////////////////////
