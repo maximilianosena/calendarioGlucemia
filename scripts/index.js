@@ -268,6 +268,7 @@ if (dia1[0] === `"01`) {
         localStorage.setItem("correoEnviado", "true"); 
     }
 } else {
+    console.log("Dia del mes")
     localStorage.setItem("correoEnviado", "false");
 }
 
