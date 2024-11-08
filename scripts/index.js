@@ -240,15 +240,10 @@ async function sendMailMensual() {
 
         if (response.ok) {
             const result = await response.json();
-            console.log(result);
-            let ultimo = result[result.length - 1].fecha;
-            let ultimo_corte = ultimo.split("-");
-            let ultimo_mes = ultimo_corte[1];
-
-            if (mes_Actual !== ultimo_mes) {
+           
                 let email = localStorage.getItem("user");
                 email_registrosMensuales(email);
-            } 
+        
         }
     } catch (e) {
         console.error("Error: ", e);
@@ -261,16 +256,16 @@ let dia1 = fechaMail.split("-")
 console.log("Hoy es", dia1[0])
 
 
-//if (dia1[0] === `"01`) {
-  //if (localStorage.getItem("correoEnviado") !== "true") {
-    //    console.log("Hoy es 1, enviando correo");
+if (dia1[0] === `"08`) {
+  if (localStorage.getItem("correoEnviado") !== "true") {
+           console.log("Hoy es 8, enviando correo");
         sendMailMensual(); 
-      //  localStorage.setItem("correoEnviado", "true"); 
-    //}
-//} else {
-  //  console.log("Dia del mes")
-    //localStorage.setItem("correoEnviado", "false");
-//}
+        localStorage.setItem("correoEnviado", "true"); 
+    }
+} else {
+   console.log("Dia del mes")
+   localStorage.setItem("correoEnviado", "false");
+}
 
 ///////////////////////Cerrar Sesión///////////////////////////////////
 
