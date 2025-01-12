@@ -62,34 +62,28 @@ checkbox_now.addEventListener("change", () => {
             let dia_Historial = fecha_Desglosada[2]
 
             let obj_fechaHistorial = `${dia_Historial}-${mes_Historial}-${año_Historial}`
-                let valor1 = historial_Hora.value[0]
-                let valor2 = historial_Hora.value[1]
-                let valor3 = historial_Hora.value[2]
-                let valor4 = historial_Hora.value[3]
-            
-            if (valor1 >2 || valor1 == 2 && valor2 >3 || valor3 > 5) {
-                alert ("Inserte un horario válido")
+                            let valor1 = historial_Hora.value[0]
+            let valor2 = historial_Hora.value[1]
+            let valor3 = historial_Hora.value[3]
+            let valor4 = historial_Hora.value[4]
+
+            if (valor1 > 2 || valor1 == 2 && valor2 > 3 || valor3 > 5) {
+                alert("Inserte un horario válido")
             }
-             else if (historial_Hora.value.length == 4 && !isNaN(historial_Hora.value)) {
-               
+            else if (historial_Hora.value.length == 5 && !isNaN(historial_Hora.value)) {
+
 
                 let hora = `${valor1}${valor2}`
                 let minutos = `${valor3}${valor4}`
 
                 let obj_horaHistorial = `${hora}:${minutos}`
 
-                localStorage.setItem("horaI", JSON.stringify(obj_horaHistorial))
-            } else if (historial_Hora.value.length > 4 && historial_Hora.value.includes(":")) {
-              
-
-                let hora = `${valor1}${valor2}`
-                let minutos = `${valor3}${valor4}`
-
-                let obj_horaHistorial = `${hora}:${minutos}`
-
-                localStorage.setItem("horaI", JSON.stringify(obj_horaHistorial))
-            } else {
+                localStorage.setItem("hora", JSON.stringify(obj_horaHistorial))
+            }  else {
                 alert("Ingrese valores numéricos validos")
+                localStorage.setItem("fecha", JSON.stringify(obj_fecha))
+                localStorage.setItem("hora", JSON.stringify(obj_hora))
+            }
                 localStorage.setItem("fechaI", JSON.stringify(obj_fecha))
                 localStorage.setItem("horaI", JSON.stringify(obj_hora))
             }
