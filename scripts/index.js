@@ -40,7 +40,7 @@ checkbox_now.addEventListener("change", () => {
     <hr>
     <div class="input-group">
         <span class="input-group-text">Hora</span>
-        <input type="datetime" name="hora" id="hora_registro" class="form-control">
+        <input type="datetime" name="hora" id="hora_registro" class="form-control" placeholder="4 dígitos, ejemplo 1745">
     </div>
         <br>
         <button id="fecha_creada" class="btn btn-success">Hecho</button>
