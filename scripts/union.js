@@ -3,7 +3,7 @@ let desde = document.getElementById("desde")
 let hasta = document.getElementById("hasta")
 
 ///////*INSULINA
-let container_registros2 = document.getElementById("container_insulina2")
+let container_insulina2 = document.getElementById("container_insulina2")
 
 function toDateTime(fecha, hora) {
     const [day, month, year] = fecha.split('-').map(Number);
@@ -13,16 +13,12 @@ function toDateTime(fecha, hora) {
 
 
 
-function view_resultados(array) {
-  // Ordenar por fecha y hora
-array.sort((a, b) => {
-    const dateA = toDateTime(a.fechaString, a.hora);
-    const dateB = toDateTime(b.fechaString, b.hora);
-    return dateB - dateA; // Ordenar de más reciente a más antiguo
-});
+function view_resultados1(array) {
 
-    for (let i in array) {
-        container_registros2.innerHTML += ` <tr>
+    container_insulina2=""
+    for (let i = 0; i < array.length; i++) {
+        container_insulina2.innerHTML += ` <tr>
+        <td>${array[i].fecha}</td>
              <td>${array[i].hora}</td>
               <td>${array[i].unidades}</td>
               <td>${array[i].tipo}</td>
@@ -35,18 +31,22 @@ array.sort((a, b) => {
 
     //////////////VALORES
 
-    let container_glucemia = document.getElementById("container_registros2")
+    let container_glucemia2 = document.getElementById("container_registros2")
 
-    function view_resultados(array) {
+    function view_resultados2(array) {
         // Ordenar por fecha y hora
         array.sort((a, b) => {
             const dateA = toDateTime(a.fechaString, a.hora);
             const dateB = toDateTime(b.fechaString, b.hora);
             return dateB - dateA; // Ordenar de más reciente a más antiguo
         });
-    
-        for (let i in array) {
-            container_glucemia.innerHTML += ` <tr class=${color_row(array[i].valor)}>
+        
+        console.log(array)
+        container_glucemia2.innerHTML =""
+        for (let i = 0; i < array.length; i++) {
+
+            console.log(array.length)
+            container_glucemia2.innerHTML += ` <tr class=${color_row(array[i].valor)}>
                 <td>${array[i].fechaString}</td>
                  <td>${array[i].hora}</td>
                   <td>${array[i].valor}</td>
@@ -78,7 +78,13 @@ array.sort((a, b) => {
             }
 
             loadPage(fechaInicio,fechaFinal)
+            let reload = document.getElementById("oculto")
+            reload.style.display = "block";
+            button_Buscador.style.display = "none";
 
+                reload.addEventListener("click", ()=>{
+                    location.reload()
+                })
 
         })
 
@@ -117,6 +123,8 @@ array.sort((a, b) => {
 
 
         let arrayResultados =[]
+        let arrayRegistros =[]
+        let arrayInsulinas =[]
 
         async function loadPage(fechaInicio, fechaFinal) {
             const data = await getValores(fechaInicio, fechaFinal)
@@ -126,12 +134,19 @@ array.sort((a, b) => {
         
                 // Ejemplo: Mostrar resultados en la consola
                 if (data.result1) {
+                    arrayRegistros.push(data.result1);
+                    view_resultados2(data.result1)
+           
                     console.log("Registros de glucemia:", data.result1);
+                   
+
                 } else {
                     console.warn("No se encontraron registros de glucemia.");
                 }
         
                 if (data.result2) {
+                    arrayInsulinas.push(data.result2);
+                    view_resultados1(data.result2)
                     console.log("Registros de insulina:", data.result2);
                 } else {
                     console.warn("No se encontraron registros de insulina.");

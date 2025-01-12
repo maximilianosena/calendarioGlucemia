@@ -54,7 +54,9 @@ label {
     align-items: stretch
  }
 
-
+#oculto{
+  display: none;
+}
 
  a.nav-link:hover {
   background-color: rgb(17, 115, 180);
