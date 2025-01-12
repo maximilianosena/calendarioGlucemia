@@ -123,19 +123,73 @@ function view_resultados1(array) {
 
 
         let arrayResultados =[]
-        let arrayRegistros =[]
-        let arrayInsulinas =[]
+        function orden(array) {
+            console.log(array.result1);
+            console.log(array.result2);
+        
+            const result1 = array.result1 || [];
+            const result2 = array.result2 || [];
+        
+            // Conjunto para almacenar los ids ya procesados
+            const processedIds = new Set();
+        
+            // Iterar sobre cada elemento de result1
+            for (let i = 0; i < result1.length; i++) {
+                const glucemia = result1[i];
+                container_glucemia2.innerHTML += ` <tr class=${color_row(glucemia.valor)}>
+                    <td>${glucemia.fechaString}</td>
+                    <td>${glucemia.hora}</td>
+                    <td>${glucemia.valor}</td>
+                    <td>${glucemia.momento === "Pre Desayuno" ? "Ayunas" : glucemia.momento}</td>
+                    <td>${glucemia.notas}</td>
+                </tr>`;
+        
+                let found = false;  
+        
+                
+                for (let j = 0; j < result2.length; j++) {
+                    if (result1[i].fechaString.trim() === result2[j].fechaString.trim() && !processedIds.has(result2[j].id)) {
+                        // Si la fecha coincide y el id no ha sido procesado
+                        container_insulina2.innerHTML += ` <tr>
+                            <td>${result2[j].fechaString}</td>
+                            <td>${result2[j].hora}</td>
+                            <td>${result2[j].unidades}</td>
+                            <td>${result2[j].tipo}</td>
+                            <td>${result2[j].momento === "Pre Desayuno" ? "Ayunas" : result2[j].momento}</td>
+                            <td>${result2[j].notas}</td>        
+                        </tr>`;
+        
+                        // Marcar este id como procesado
+                        processedIds.add(result2[j].id);
+        
+                        found = true;  // Si encontramos una coincidencia, marcamos que sí
+                        break;  
+                    }
+                }
+        
+                
+                if (!found) {
+                    container_insulina2.innerHTML += ` <tr>
+                        <td>SIN DATOS</td>
+                        <td>------</td>
+                        <td>------</td>
+                        <td>------</td>
+                        <td>------</td>
+                        <td>------</td>        
+                    </tr>`;
+                }
+            }
+        }
 
         async function loadPage(fechaInicio, fechaFinal) {
             const data = await getValores(fechaInicio, fechaFinal)
             if (data) {
-                arrayResultados.push(data);
+                
                 console.log("Datos obtenidos:", data);
-        
+                orden(data);
                 // Ejemplo: Mostrar resultados en la consola
                 if (data.result1) {
-                    arrayRegistros.push(data.result1);
-                    view_resultados2(data.result1)
+                   
            
                     console.log("Registros de glucemia:", data.result1);
                    
@@ -145,8 +199,6 @@ function view_resultados1(array) {
                 }
         
                 if (data.result2) {
-                    arrayInsulinas.push(data.result2);
-                    view_resultados1(data.result2)
                     console.log("Registros de insulina:", data.result2);
                 } else {
                     console.warn("No se encontraron registros de insulina.");
