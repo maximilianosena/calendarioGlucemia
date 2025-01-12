@@ -150,10 +150,11 @@ function hemoglobina(año) {
     hemoglobina_glicosilada.innerHTML += `
     <h5>La hemoglobina Glicosilada es de ${result_hemoglobina > 0 ? final : 0}%</h5>
     <br>
-    <p> <small> Este dato tomará fiabilidad al recibir datos de al menos los últimos 2 o 3 meses. </small></p>
+    <p> <small> Este dato tomará fiabilidad al recibir datos de al menos los últimos 3 meses. </small></p>
     <div class="aviso"> Ver Mas
-        <span class="explicacion">El porcentaje resulta de la recopilación de todos los registros que 
-        haga dentro de un trimestre </span>
+        <span class="explicacion">Es un estimativo, NO un dato oficial médico.
+        El porcentaje resulta de la recopilación de todos los registros que 
+        haga dentro de un trimestre.</span>
     </div>
     <br>
 `;
