@@ -68,16 +68,32 @@ function view_resultados1(array) {
 
         button_Buscador.addEventListener("click", ()=>{
 
-            let fechaInicio = desde.value
-            let fechaFinal = hasta.value
+               let desde_Fecha = document.getElementById("desde")
+let hasta_Fecha = document.getElementById("hasta")
 
+     let fecha_desde = new Date(desde_Fecha.value)
+     let fecha_hasta = new Date (hasta_Fecha.value)
 
-            if (!fechaInicio || !fechaFinal) {
+            let fecha_Desglosada_desde = desde_Fecha.value.split("-")
+let fecha_Desglosada_hasta = hasta_Fecha.value.split("-")
+
+            let año_Historial_desde = fecha_Desglosada_desde[0]
+            let mes_Historial_desde = fecha_Desglosada_desde[1]
+            let dia_Historial_desde = fecha_Desglosada_desde[2]
+let año_Historial_hasta= fecha_Desglosada_hasta[0]
+            let mes_Historial_hasta = fecha_Desglosada_hasta[1]
+            let dia_Historial_hasta= fecha_Desglosada_hasta[2]
+
+            let obj_fechaHistorial_desde = `${dia_Historial_desde}-${mes_Historial_desde}-${año_Historial_desde}`
+
+let obj_fechaHistorial_hasta = `${dia_Historial_hasta}-${mes_Historial_hasta}-${año_Historial_hasta}`
+
+            if (!obj_fechaHistorial_desde || !obj_fechaHistorial_hasta) {
                 console.error("Por favor ingresa ambas fechas.");
                 return;
             }
 
-            loadPage(fechaInicio,fechaFinal)
+            loadPage(obj_fechaHistorial_desde, obj_fechaHistorial_hasta)
             let reload = document.getElementById("oculto")
             reload.style.display = "block";
             button_Buscador.style.display = "none";
