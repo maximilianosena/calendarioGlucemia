@@ -68,21 +68,27 @@ array.sort((a, b) => {
 
         button_Buscador.addEventListener("click", ()=>{
 
-            let fechaIncio = desde.value()
-            let fechaFinal = hasta.value()
+            let fechaInicio = desde.value
+            let fechaFinal = hasta.value
 
-        
+
+            if (!fechaInicio || !fechaFinal) {
+                console.error("Por favor ingresa ambas fechas.");
+                return;
+            }
+
+            loadPage(fechaInicio,fechaFinal)
 
 
         })
 
-        async function getValores(fechaIncio, fechaFinal) {
+        async function getValores(fechaInicio, fechaFinal) {
 
             try {
                 let token = localStorage.getItem("token")
                 const userId = localStorage.getItem('id')
                 const [response1, response2] = await Promise.all([ 
-                    fetch(`https://backend-glucemia.vercel.app/buscar?userId=${userId}desde=${fechaIncio}&hasta=${fechaFinal}`, 
+                    fetch(`https://backend-glucemia.vercel.app/buscar?userId=${userId}&desde=${fechaInicio}&hasta=${fechaFinal}`, 
                     {
                     method: 'GET',
                     headers: {
@@ -90,7 +96,7 @@ array.sort((a, b) => {
                     }
                 }),
                 fetch(
-                    `https://backend-glucemia.vercel.app/buscarInsulina?userId=${userId}desde=${fechaIncio}&hasta=${fechaFinal}`,
+                    `https://backend-glucemia.vercel.app/buscarInsulina?userId=${userId}&desde=${fechaInicio}&hasta=${fechaFinal}`,
                     {
                         method: 'GET',
                         headers: {
@@ -112,11 +118,26 @@ array.sort((a, b) => {
 
         let arrayResultados =[]
 
-        async function loadPage(page) {
-            const data = await getValores(fechaIncio, fechaFinal)
-            if (data){
-                     arrayResultados.push(data)
-                     console.log(data)
-                     
+        async function loadPage(fechaInicio, fechaFinal) {
+            const data = await getValores(fechaInicio, fechaFinal)
+            if (data) {
+                arrayResultados.push(data);
+                console.log("Datos obtenidos:", data);
+        
+                // Ejemplo: Mostrar resultados en la consola
+                if (data.result1) {
+                    console.log("Registros de glucemia:", data.result1);
+                } else {
+                    console.warn("No se encontraron registros de glucemia.");
+                }
+        
+                if (data.result2) {
+                    console.log("Registros de insulina:", data.result2);
+                } else {
+                    console.warn("No se encontraron registros de insulina.");
+                }
+            } else {
+                console.error("No se obtuvieron datos.");
+            }
          }
-         }
+
