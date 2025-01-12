@@ -64,13 +64,13 @@ checkbox_now.addEventListener("change", () => {
             let obj_fechaHistorial = `${dia_Historial}-${mes_Historial}-${año_Historial}`
             let valor1 = historial_Hora.value[0]
             let valor2 = historial_Hora.value[1]
-            let valor3 = historial_Hora.value[2]
-            let valor4 = historial_Hora.value[3]
+            let valor3 = historial_Hora.value[3]
+            let valor4 = historial_Hora.value[4]
 
             if (valor1 > 2 || valor1 == 2 && valor2 > 3 || valor3 > 5) {
                 alert("Inserte un horario válido")
             }
-            else if (historial_Hora.value.length == 4 && !isNaN(historial_Hora.value)) {
+            else if (historial_Hora.value.length == 5 && !isNaN(historial_Hora.value)) {
 
 
                 let hora = `${valor1}${valor2}`
@@ -79,16 +79,7 @@ checkbox_now.addEventListener("change", () => {
                 let obj_horaHistorial = `${hora}:${minutos}`
 
                 localStorage.setItem("hora", JSON.stringify(obj_horaHistorial))
-            } else if (historial_Hora.value.length > 4 && historial_Hora.value.includes(":")) {
-
-
-                let hora = `${valor1}${valor2}`
-                let minutos = `${valor3}${valor4}`
-
-                let obj_horaHistorial = `${hora}:${minutos}`
-
-                localStorage.setItem("hora", JSON.stringify(obj_horaHistorial))
-            } else {
+            }  else {
                 alert("Ingrese valores numéricos validos")
                 localStorage.setItem("fecha", JSON.stringify(obj_fecha))
                 localStorage.setItem("hora", JSON.stringify(obj_hora))
