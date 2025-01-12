@@ -54,6 +54,8 @@ label {
     align-items: stretch
  }
 
+
+
  a.nav-link:hover {
   background-color: rgb(17, 115, 180);
   border-radius: 8%;

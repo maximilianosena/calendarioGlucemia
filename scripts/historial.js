@@ -154,7 +154,7 @@ async function getValores(page,limit) {
         if (response.ok) {
             
             const result = await response.json()
-            console.log(result.registros)
+            console.log(result)
             return result
         }
     }
