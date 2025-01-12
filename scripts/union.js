@@ -132,7 +132,7 @@ function view_resultados1(array) {
         
             // Conjunto para almacenar los ids ya procesados
             const processedIds = new Set();
-        
+         
             // Iterar sobre cada elemento de result1
             for (let i = 0; i < result1.length; i++) {
                 const glucemia = result1[i];
