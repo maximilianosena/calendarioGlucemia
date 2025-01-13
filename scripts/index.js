@@ -62,21 +62,24 @@ checkbox_now.addEventListener("change", () => {
             let dia_Historial = fecha_Desglosada[2]
 
             let obj_fechaHistorial = `${dia_Historial}-${mes_Historial}-${año_Historial}`
-            let inputHora = historial_Hora.value.trim(); // Asegura eliminar espacios en blanco
+                                        let valor1 = historial_Hora.value[0]
+            let valor2 = historial_Hora.value[1]
+            let valor3 = historial_Hora.value[3]
+            let valor4 = historial_Hora.value[4]
 
-// Validar formato HH:mm con regex
-let regexHora = /^([01]?[0-9]|2[0-3]):([0-5][0-9])$/; // HH entre 00-23 y mm entre 00-59
+            if (valor1 > 2 || valor1 == 2 && valor2 > 3 || valor3 > 5) {
+                alert("Inserte un horario válido")
+            }
+            else if (historial_Hora.value.length == 5 && !isNaN(historial_Hora.value)) {
 
-if (!regexHora.test(inputHora)) {
-    alert("Inserte un horario válido");
-} else {
-    // Separar hora y minutos usando desestructuración
-    let [hora, minutos] = inputHora.split(':');
-    let obj_horaHistorial = `${hora}:${minutos}`;
+
+                let hora = `${valor1}${valor2}`
+                let minutos = `${valor3}${valor4}`
+
+                let obj_horaHistorial = `${hora}:${minutos}`
 
     console.log(`Hora válida: ${obj_horaHistorial}`);
-    // Aquí puedes continuar con tu lógica
-}
+    
 
                 localStorage.setItem("hora", JSON.stringify(obj_horaHistorial))
             }  else {
