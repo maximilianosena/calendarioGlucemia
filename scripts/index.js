@@ -40,7 +40,7 @@ checkbox_now.addEventListener("change", () => {
         <hr>
         <div class="input-group">
             <span class="input-group-text">Hora</span>
-            <input type="text" name="hora" id="hora_registro" class="form-control" placeholder="Formato HH:mm, ejemplo 17:15">
+            <input type="text" name="hora" id="hora_registro" class="form-control" placeholder="Formato HH:mm, ejemplo 22:45">
         </div>
         <br>
         <button id="fecha_creada" class="btn btn-success">Hecho</button>
@@ -68,9 +68,9 @@ checkbox_now.addEventListener("change", () => {
             let obj_fechaHistorial = `${dia_Historial}-${mes_Historial}-${año_Historial}`;
 
             // Validación de la hora
-            let horaFormatoRegex = /^([01]\d|2[0-3]):([0-5]\d)$/; // Formato HH:mm
+            let horaFormatoRegex = /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/; // Formato HH:mm
             if (!horaFormatoRegex.test(historial_Hora.value)) {
-                alert("Inserte un horario válido en el formato HH:mm, ejemplo 17:15");
+                alert("Inserte un horario válido en el formato HH:mm, ejemplo 22:45");
                 return;
             }
 
