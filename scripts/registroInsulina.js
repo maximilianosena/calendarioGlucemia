@@ -33,70 +33,67 @@ checkbox_now.addEventListener("change", () => {
     if (checkbox_now.checked) {
         container.innerHTML += `
         <hr>
-    <div class="form-date">
-        <label for="fecha">Fecha:</label>
-        <input type="date" id="fecha" name="fecha_registro"/>
-    </div>
-    <hr>
-    <div class="input-group">
-        <span class="input-group-text">Hora</span>
-        <input type="datetime" name="hora" id="hora_registro" class="form-control" placeholder="4 dígitos, ejemplo 1745">
-    </div>
+        <div class="form-date">
+            <label for="fecha">Fecha:</label>
+            <input type="date" id="fecha" name="fecha_registro"/>
+        </div>
+        <hr>
+        <div class="input-group">
+            <span class="input-group-text">Hora</span>
+            <input type="text" name="hora" id="hora_registro" class="form-control" placeholder="4 dígitos, ejemplo 1745">
+        </div>
         <br>
         <button id="fecha_creada" class="btn btn-success">Hecho</button>
-        `
+        `;
 
-        let historial_Fecha = document.getElementById("fecha")
-        let historial_Hora = document.getElementById("hora_registro")
-        let button_hecho = document.getElementById("fecha_creada")
-
-
+        let historial_Fecha = document.getElementById("fecha");
+        let historial_Hora = document.getElementById("hora_registro");
+        let button_hecho = document.getElementById("fecha_creada");
 
         button_hecho.addEventListener("click", (e) => {
-            e.preventDefault()
-            
-            let fecha_comparativa = new Date(historial_Fecha.value)
-            let fecha_Desglosada = historial_Fecha.value.split("-")
-            let año_Historial = fecha_Desglosada[0]
-            let mes_Historial = fecha_Desglosada[1]
-            let dia_Historial = fecha_Desglosada[2]
+            e.preventDefault();
 
-            let obj_fechaHistorial = `${dia_Historial}-${mes_Historial}-${año_Historial}`
-                            let valor1 = historial_Hora.value[0]
-            let valor2 = historial_Hora.value[1]
-            let valor3 = historial_Hora.value[3]
-            let valor4 = historial_Hora.value[4]
+            let fecha_comparativa = new Date(historial_Fecha.value);
+            let fecha_Desglosada = historial_Fecha.value.split("-");
+            let año_Historial = fecha_Desglosada[0];
+            let mes_Historial = fecha_Desglosada[1];
+            let dia_Historial = fecha_Desglosada[2];
 
-            if (valor1 > 2 || valor1 == 2 && valor2 > 3 || valor3 > 5) {
-                alert("Inserte un horario válido")
+            let obj_fechaHistorial = `${dia_Historial}-${mes_Historial}-${año_Historial}`;
+
+            let valor1 = historial_Hora.value[0];
+            let valor2 = historial_Hora.value[1];
+            let valor3 = historial_Hora.value[2];
+            let valor4 = historial_Hora.value[3];
+
+            if (
+                historial_Hora.value.length !== 4 || 
+                isNaN(historial_Hora.value) ||
+                valor1 > 2 || 
+                (valor1 == 2 && valor2 > 3) || 
+                valor3 > 5
+            ) {
+                alert("Inserte un horario válido");
+            } else {
+                let hora = `${valor1}${valor2}`;
+                let minutos = `${valor3}${valor4}`;
+
+                let obj_horaHistorial = `${hora}:${minutos}`;
+                console.log(`Hora válida: ${obj_horaHistorial}`);
+
+                // Guardar datos en localStorage
+                localStorage.setItem("hora", JSON.stringify(obj_horaHistorial));
+                localStorage.setItem("fecha", JSON.stringify(obj_fechaHistorial));
+                localStorage.setItem("fechaComparativa", JSON.stringify(fecha_comparativa.toISOString()));
             }
-            else if (historial_Hora.value.length == 5 && !isNaN(historial_Hora.value)) {
-
-
-                let hora = `${valor1}${valor2}`
-                let minutos = `${valor3}${valor4}`
-
-                let obj_horaHistorial = `${hora}:${minutos}`
-
-                localStorage.setItem("hora", JSON.stringify(obj_horaHistorial))
-            }  else {
-                alert("Ingrese valores numéricos validos")
-                localStorage.setItem("fecha", JSON.stringify(obj_fecha))
-                localStorage.setItem("hora", JSON.stringify(obj_hora))
-            }
-                localStorage.setItem("fechaI", JSON.stringify(obj_fecha))
-                localStorage.setItem("horaI", JSON.stringify(obj_hora))
-            }
-            localStorage.setItem("fechaI", JSON.stringify(obj_fechaHistorial))
-            localStorage.setItem("fechaComparativaI", JSON.stringify(fecha_comparativa.toISOString()))
-        })
-
+        });
     } else {
-        container.innerHTML = ""
-        localStorage.setItem("fechaI", JSON.stringify(obj_fecha))
-        localStorage.setItem("horaI", JSON.stringify(obj_hora))
+        container.innerHTML = "";
+        localStorage.removeItem("fecha");
+        localStorage.removeItem("hora");
     }
-})
+});
+
 
 
 
