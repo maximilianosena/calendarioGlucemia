@@ -40,7 +40,7 @@ checkbox_now.addEventListener("change", () => {
         <hr>
         <div class="input-group">
             <span class="input-group-text">Hora</span>
-            <input type="text" name="hora" id="hora_registro" class="form-control" placeholder="4 dígitos, ejemplo 1745">
+            <input type="text" name="hora" id="hora_registro" class="form-control" placeholder="Formato HH:mm, ejemplo 17:15">
         </div>
         <br>
         <button id="fecha_creada" class="btn btn-success">Hecho</button>
@@ -53,7 +53,13 @@ checkbox_now.addEventListener("change", () => {
         button_hecho.addEventListener("click", (e) => {
             e.preventDefault();
 
+            // Validación de la fecha
             let fecha_comparativa = new Date(historial_Fecha.value);
+            if (!historial_Fecha.value) {
+                alert("Por favor, ingrese una fecha válida.");
+                return;
+            }
+
             let fecha_Desglosada = historial_Fecha.value.split("-");
             let año_Historial = fecha_Desglosada[0];
             let mes_Historial = fecha_Desglosada[1];
@@ -61,31 +67,23 @@ checkbox_now.addEventListener("change", () => {
 
             let obj_fechaHistorial = `${dia_Historial}-${mes_Historial}-${año_Historial}`;
 
-            let valor1 = historial_Hora.value[0];
-            let valor2 = historial_Hora.value[1];
-            let valor3 = historial_Hora.value[2];
-            let valor4 = historial_Hora.value[3];
-
-            if (
-                historial_Hora.value.length !== 4 || 
-                isNaN(historial_Hora.value) ||
-                valor1 > 2 || 
-                (valor1 == 2 && valor2 > 3) || 
-                valor3 > 5
-            ) {
-                alert("Inserte un horario válido");
-            } else {
-                let hora = `${valor1}${valor2}`;
-                let minutos = `${valor3}${valor4}`;
-
-                let obj_horaHistorial = `${hora}:${minutos}`;
-                console.log(`Hora válida: ${obj_horaHistorial}`);
-
-                // Guardar datos en localStorage
-                localStorage.setItem("hora", JSON.stringify(obj_horaHistorial));
-                localStorage.setItem("fecha", JSON.stringify(obj_fechaHistorial));
-                localStorage.setItem("fechaComparativa", JSON.stringify(fecha_comparativa.toISOString()));
+            // Validación de la hora
+            let horaFormatoRegex = /^([01]\d|2[0-3]):([0-5]\d)$/; // Formato HH:mm
+            if (!horaFormatoRegex.test(historial_Hora.value)) {
+                alert("Inserte un horario válido en el formato HH:mm, ejemplo 17:15");
+                return;
             }
+
+            let [hora, minutos] = historial_Hora.value.split(":");
+            let obj_horaHistorial = `${hora}:${minutos}`;
+
+            console.log(`Fecha válida: ${obj_fechaHistorial}`);
+            console.log(`Hora válida: ${obj_horaHistorial}`);
+
+            // Guardar en localStorage
+            localStorage.setItem("hora", JSON.stringify(obj_horaHistorial));
+            localStorage.setItem("fecha", JSON.stringify(obj_fechaHistorial));
+            localStorage.setItem("fechaComparativa", JSON.stringify(fecha_comparativa.toISOString()));
         });
     } else {
         container.innerHTML = "";
@@ -93,7 +91,6 @@ checkbox_now.addEventListener("change", () => {
         localStorage.removeItem("hora");
     }
 });
-
 
 
 
