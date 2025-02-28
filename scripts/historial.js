@@ -25,7 +25,7 @@ function view_resultados(array) {
             <td>${array[i].fechaString}</td>
              <td>${array[i].hora}</td>
               <td>${array[i].valor}</td>
-               <td>${array[i].momento==="Pre Desayuno"?"Ayunas":array[i].momento}</td>
+               <td>${array[i].momento}</td>
                 <td>${array[i].notas}</td>
                  <td><button id=${array[i].id} name="borrar">X</button></td>         
         </tr>`
@@ -172,7 +172,6 @@ async function loadPage(page) {
    if (data){
             currentPage = page
             arrayResultados.push(data.registros)
-            console.log(arrayResultados[0][2].valor)
             container_registros.innerHTML =""
             view_resultados(data.registros)
 } else {
