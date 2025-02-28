@@ -1,3 +1,5 @@
+let valores = []
+
 async function getValores() {
     try {
         let token = localStorage.getItem("token")
@@ -13,6 +15,7 @@ async function getValores() {
             const result = await response.json();
            
                 console.log("valores: ", result)
+                valores.push(result)
                 view_resultados(result)
         }
     } catch (e) {
@@ -21,6 +24,14 @@ async function getValores() {
 }
 
 getValores()
+
+let btn_close = document.getElementById("close")
+
+btn_close.addEventListener("click", () => {
+    localStorage.clear()
+    location.reload()
+})
+
 
 function toDateTime(fecha, hora) {
     const [day, month, year] = fecha.split('-').map(Number);
@@ -82,3 +93,84 @@ fechasOrdenadas.forEach(fecha => {
 container_registros.innerHTML = html;
 
 }
+
+
+
+let desde = document.getElementById("desde");
+let hasta = document.getElementById("hasta");
+
+desde.addEventListener("change",() =>{
+
+    console.log(desde.value)
+
+    localStorage.setItem("desde", desde.value)
+}
+
+)
+
+hasta.addEventListener("change",() =>{
+
+    console.log(hasta.value)
+    localStorage.setItem("hasta", hasta.value)
+}
+
+)
+
+let valorDesde = localStorage.getItem("desde") || "0";
+let valorHasta = localStorage.getItem("hasta") || "0";
+let filtro = [];
+let btn_filtro = document.getElementById("fecha_filtro")
+let btn_reset = document.getElementById("fecha_resta")
+console.log(valores)
+
+btn_filtro.addEventListener("click", () => {
+
+    console.log("Array valores:", valores);
+
+    let valorDesde = localStorage.getItem("desde");
+    let valorHasta = localStorage.getItem("hasta");
+
+    if (!valorDesde || !valorHasta) {
+        console.error("Error: No hay fechas seleccionadas.");
+        return;
+    }
+
+    let fechaInicio = new Date(valorDesde);
+    let fechaFin = new Date(valorHasta);
+    fechaInicio.setDate(fechaInicio.getDate() + 1);
+    fechaFin.setDate(fechaFin.getDate() + 1);
+    fechaInicio.setHours(0, 0, 0, 0);
+    fechaFin.setHours(23, 59, 59, 999);
+    console.log("Fecha Desde (JS):", fechaInicio);
+    console.log("Fecha Hasta (JS):", fechaFin);
+
+    let filtro = [];
+    let arrayValores = valores[0]
+    for (let i = 0; i < arrayValores.length; i++) {
+        let item = arrayValores[i];
+
+        if (!item || !item.fecha) {
+            console.warn(`Advertencia: El elemento en índice ${i} no tiene fecha válida.`);
+            continue;
+        }
+
+        let fechaActual = new Date(item.fecha); // Convertimos la fecha del JSON
+
+        if (fechaActual >= fechaInicio && fechaActual <= fechaFin) {
+            filtro.push(item);
+        }
+    }
+
+    console.log("Resultados filtrados:", filtro);
+    view_resultados(filtro)
+});
+
+btn_reset.addEventListener("click", () => {
+
+    view_resultados(valores[0])
+})
+
+
+
+
+

@@ -44,7 +44,18 @@
       </nav>
      
       <hr>
-
+      <span>
+      <div class="form-date">
+        <label for="fecha">Desde:</label>
+        <input type="date" id="desde" name="fecha_registro"/>
+        <label for="fecha">Hasta:</label>
+        <input type="date" id="hasta" name="fecha_registro"/>
+        <button id="fecha_filtro" class="btn btn-info" style="max-width: 10%;">Hecho</button>
+        <button id="fecha_resta" class="btn btn-warning" style="max-width: 10%;">Restablecer</button>
+    </div>
+    </span>
+    <hr>
+    <p style="text-align: center;">Las fechas se presentan desde la más reciente hacia la fecha más antigua</p>
       <hr>
     <table class="table table-striped"><thead>
         <tr>
