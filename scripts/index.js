@@ -265,7 +265,8 @@ btn_close.addEventListener("click", () => {
 })
 
 /////////////////////////Grafica Mes Actual/////////////////////
-
+min_valor = localStorage.getItem("min")
+max_valor = localStorage.getItem("max")
 const ctz = document.getElementById('myChart1').getContext('2d');
 let myChart1;
 
@@ -324,8 +325,8 @@ function tipo_grafica(mes) {
                             type: 'box',
                             xMin: ultimos10[0],
                             xMax: ultimos10[ultimos10.length - 1],
-                            yMin: 180,
-                            yMax: 600,
+                            yMin: max_valor,
+                            yMax: 450,
                             backgroundColor: 'rgba(255, 99, 132, 0.5)',
                             borderColor: 'rgba(255, 99, 132, 1)',
                             borderWidth: 1
@@ -335,7 +336,7 @@ function tipo_grafica(mes) {
                             xMin: ultimos10[0],
                             xMax: ultimos10[ultimos10.length - 1],
                             yMin: 0,
-                            yMax: 70,
+                            yMax: min_valor,
                             backgroundColor: 'rgba(80, 133, 188, 0.5)',
                             borderColor: 'rgba(80, 133, 188, 1)',
                             borderWidth: 1
@@ -344,8 +345,8 @@ function tipo_grafica(mes) {
                             type: 'box',
                             xMin: ultimos10[0],
                             xMax: ultimos10[ultimos10.length - 1],
-                            yMin: 70,
-                            yMax: 180,
+                            yMin: min_valor,
+                            yMax: max_valor,
                             backgroundColor: 'rgba(0, 128, 0, 0.25)',
                             borderColor: 'rgba(0, 128, 0, 1)',
                             borderWidth: 1
@@ -362,7 +363,7 @@ function tipo_grafica(mes) {
                     grid: {
                         display: false
                     },
-                    max: 600,
+                    max: 450,
                     beginAtZero: true
                 }
             }

@@ -5,6 +5,9 @@ document.addEventListener("DOMContentLoaded", function () {
     let formulario = document.getElementById("datos")
     let input_alias = document.getElementById("userAlias")
     let aviso = document.getElementById("aviso")
+    let input_min = document.getElementById("min_aceptado")
+    let input_max = document.getElementById("max_aceptado")
+
     formulario.addEventListener("submit", async function (e) {
       if (!formulario.checkValidity()) {
           e.preventDefault();
@@ -17,12 +20,17 @@ document.addEventListener("DOMContentLoaded", function () {
       const user = input_user.value.trim();
       const pass = input_pass.value.trim();
       const user_alias = input_alias.value.trim();
-      
+      const min = input_min.value.trim()
+      const max = input_max.value.trim()
+
+
       if (user !== "" && pass !== "" && user_alias !== "") {
           const obj = {
               email: user,
               password: pass,
-              alias: user_alias
+              alias: user_alias,
+              min_aceptable: min,
+              max_aceptable: max
           };
   
           console.log('Datos enviados:', obj);
@@ -43,6 +51,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     localStorage.setItem("alias", user_alias)
                     localStorage.setItem("email", user)
                     localStorage.setItem("primeraVez", "true")
+                    localStorage.setItem("min", min)
+                    localStorage.setItem("max", max)
                     location.replace("index.html")
                  
               } else if (response.status === 409) {  // 409: Conflicto (alias o email ya existen)

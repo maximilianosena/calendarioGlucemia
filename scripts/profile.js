@@ -33,11 +33,14 @@ getValores()
 async function showPerfil(datos){
     let nombre = document.getElementById("nombre")
     let email = document.getElementById("email")
-
-    
+    let val_minimo = document.getElementById("val_min")
+    let val_maximo = document.getElementById("val_max")
+    let min = localStorage.getItem('min')
+    let max = localStorage.getItem('max')
         nombre.innerHTML += `<span><strong> Nombre del Usuario: </strong>${datos.alias} </span>`;
         email.innerHTML += `<span> <strong>Email registrado: </strong> ${datos.email} </span>`;
-   
+        val_maximo.innerHTML += `<span> <strong>Valor máximo elegido: </strong> ${max} mg/dL</span>`;
+        val_minimo.innerHTML += `<span> <strong>Valor mínimo elegido: </strong> ${min} mg/dL </span>`;
     
 }
 

@@ -91,16 +91,17 @@ function separarMes(variable) {
 }
 
 let rango = document.getElementById("tiempoRango")
-
+let min_valor = localStorage.getItem("min")
+let max_valor = localStorage.getItem("max")
 function promedioValores(dato) {
     let arriba = []
     let abajo = []
     let normal = []
     for (let i = 0; i < dato.valor.length; i++) {
        
-        if (dato.valor[i] > 180) {
+        if (dato.valor[i] > max_valor) {
             arriba.push(dato.valor[i])
-        } else if (dato.valor[i] < 70) {
+        } else if (dato.valor[i] < min_valor) {
             abajo.push(dato.valor[i])
         } else {
             normal.push(dato.valor[i])
@@ -167,9 +168,9 @@ function promedioValoresMesAnterior(dato) {
     let normal = []
     for (let i = 0; i < dato.valor.length; i++) {
         
-        if (dato.valor[i] > 180) {
+        if (dato.valor[i] > max_valor) {
             arriba.push(dato.valor[i])
-        } else if (dato.valor[i] < 70) {
+        } else if (dato.valor[i] < min_valor) {
             abajo.push(dato.valor[i])
         } else {
             normal.push(dato.valor[i])

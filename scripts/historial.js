@@ -70,11 +70,13 @@ async function deleteRegistro(id) {
 
 }
 
+let min_valor = localStorage.getItem("min")
+let max_valor = localStorage.getItem("max")
 
 function color_row(valor){
-    if (valor > 180 ){
+    if (valor > max_valor ){
         return("table-danger")
-    } else if (valor < 70) {
+    } else if (valor < min_valor) {
 return ("table-primary") 
 } else {
         return("table-success")
@@ -96,7 +98,7 @@ checkAlto.addEventListener("click",()=>{
         container_registros.innerHTML =``
         
         for (let i=0; i<arrayResultados[0].length ; i++){
-            if (arrayResultados[0][i].valor > 180) {
+            if (arrayResultados[0][i].valor > max_valor) {
                 arrayAlto.push(arrayResultados[0][i])
             }
         }
@@ -109,7 +111,7 @@ checkAlto.addEventListener("click",()=>{
         container_registros.innerHTML =``
         
         for (let i=0; i<arrayResultados[0].length ; i++){
-            if (arrayResultados[0][i].valor < 70) {
+            if (arrayResultados[0][i].valor < min_valor) {
                 arrayBajo.push(arrayResultados[0][i])
             }
         }
@@ -121,7 +123,7 @@ checkAlto.addEventListener("click",()=>{
         container_registros.innerHTML =``
         
         for (let i=0; i<arrayResultados[0].length ; i++){
-            if (arrayResultados[0][i].valor >= 70 && arrayResultados[0][i].valor <= 180  ) {
+            if (arrayResultados[0][i].valor >= min_valor && arrayResultados[0][i].valor <= max_valor  ) {
                 arrayNormal.push(arrayResultados[0][i])
             }
         }
