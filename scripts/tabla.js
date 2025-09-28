@@ -76,6 +76,7 @@ fechasOrdenadas.forEach(fecha => {
     let fila = registrosPorFecha[fecha];
     html += `
         <tr style="text-align: center;">
+            <td>${array.fechaString}</td>
             <td>${fila["Ayunas"]}</td>
             <td>${fila["Pre Desayuno"]}</td>
             <td>${fila["Post Desayuno"]}</td>
