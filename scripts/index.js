@@ -314,7 +314,7 @@ function tipo_grafica(mes) {
 
     const layout = {
     title: "Glucemia por Fecha",
-    xaxis: { title: "Fecha" },
+    xaxis: { title: "Fecha", type: 'category' },
     yaxis: { title: "mg/dL" },
     shapes: [
       {
