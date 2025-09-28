@@ -267,8 +267,8 @@ btn_close.addEventListener("click", () => {
 /////////////////////////Grafica Mes Actual/////////////////////
 min_valor = localStorage.getItem("min")
 max_valor = localStorage.getItem("max")
-const ctz = document.getElementById('myChart1').getContext('2d');
-let myChart1;
+ //const ctz = document.getElementById('myChart1').getContext('2d');
+//let myChart1;
 
 function toDateTime(fecha, hora) {
     const [day, month, year] = fecha.split('-').map(Number);
@@ -302,7 +302,61 @@ function tipo_grafica(mes) {
 
     if (ultimos10.length < 1) return;
 
-    // Crear el gráfico
+    const datos = [{
+      x: ultimos10,
+      y: ultimos10datos,
+      type: "scatter",
+      mode: "lines+markers",
+      name: "Glucemia",
+      line: { color: "blue" },
+      marker: { size: 8 }
+  }];
+
+    const layout = {
+    title: "Glucemia por Fecha",
+    xaxis: { title: "Fecha" },
+    yaxis: { title: "mg/dL" },
+    shapes: [
+      {
+        type: "rect",
+        xref: "paper",
+        yref: "y",
+        x0: 0,
+        x1: 1,
+        y0: min_valor,
+        y1: max_valor,
+        fillcolor: "rgba(0, 255, 0, 0.1)",
+        line: { width: 0 }
+      },
+      {
+        type: "rect",
+        xref: "paper",
+        yref: "y",
+        x0: 0,
+        x1: 1,
+        y0: 0,
+        y1: min_valor,
+        fillcolor: "rgba(255, 0, 0, 0.2)",
+        line: { width: 0 }
+      },      
+      {
+        type: "rect",
+        xref: "paper",
+        yref: "y",
+        x0: 0,
+        x1: 1,
+        y0: max_valor,
+        y1: 600, 
+        fillcolor: "rgba(255, 0, 0, 0.2)",
+        line: { width: 0 }
+      }
+    ]
+  };
+
+  // Dibujar gráfico
+  Plotly.newPlot("graficoPlotly", datos, layout);}
+
+    /*// Crear el gráfico
     myChart1 = new Chart(ctz, {
         type: 'line', // Tipo de gráfico
         data: {
@@ -369,7 +423,10 @@ function tipo_grafica(mes) {
             }
         }
     });
-}
+}*/
+
+
+
 
 
 
