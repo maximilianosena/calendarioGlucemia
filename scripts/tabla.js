@@ -14,9 +14,9 @@ async function getValores() {
         if (response.ok) {
             const result = await response.json();
            
-                console.log("valores: ", result[0])
-                valores.push(result[0])
-                view_resultados(result[0])
+                console.log("valores: ", result)
+                valores.push(result)
+                view_resultados(result)
         }
     } catch (e) {
         console.error("Error: ", e);
@@ -169,7 +169,7 @@ btn_filtro.addEventListener("click", () => {
 
 btn_reset.addEventListener("click", () => {
 
-    view_resultados(valores[0][0])
+    view_resultados(valores[0])
 })
 
 
