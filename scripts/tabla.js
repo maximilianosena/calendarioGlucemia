@@ -48,7 +48,7 @@ let registrosPorFecha = {};
 array.forEach(item => {
     if (!registrosPorFecha[item.fechaString]) {
         registrosPorFecha[item.fechaString] = {
-            "Fecha":item.fecha,
+            "Fecha":item.fechaString,
             "Ayunas": "---",
             "Pre Desayuno": "---",
             "Post Desayuno": "---",
@@ -77,7 +77,7 @@ fechasOrdenadas.forEach(fecha => {
     let fila = registrosPorFecha[fecha];
     html += `
         <tr style="text-align: center;">
-            <td>${array.fechaString}</td>
+            <td>${fila["Fecha"]}</td>
             <td>${fila["Ayunas"]}</td>
             <td>${fila["Pre Desayuno"]}</td>
             <td>${fila["Post Desayuno"]}</td>
