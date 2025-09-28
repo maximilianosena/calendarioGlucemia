@@ -14,7 +14,7 @@ async function getValores() {
         if (response.ok) {
             const result = await response.json();
            
-                console.log("valores: ", result)
+                console.log("valores: ", result[0])
                 valores.push(result)
                 view_resultados(result)
         }
