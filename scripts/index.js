@@ -267,8 +267,8 @@ btn_close.addEventListener("click", () => {
 /////////////////////////Grafica Mes Actual/////////////////////
 min_valor = localStorage.getItem("min")
 max_valor = localStorage.getItem("max")
- //const ctz = document.getElementById('myChart1').getContext('2d');
-//let myChart1;
+ const ctz = document.getElementById('myChart1').getContext('2d');
+ let myChart1;
 
 function toDateTime(fecha, hora) {
     const [day, month, year] = fecha.split('-').map(Number);
