@@ -48,6 +48,7 @@ let registrosPorFecha = {};
 array.forEach(item => {
     if (!registrosPorFecha[item.fechaString]) {
         registrosPorFecha[item.fechaString] = {
+            "Fecha":"",
             "Ayunas": "---",
             "Pre Desayuno": "---",
             "Post Desayuno": "---",
