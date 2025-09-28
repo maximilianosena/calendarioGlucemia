@@ -120,28 +120,40 @@ let button_submit = document.getElementById("anotacionInsulina")
 
 
 button_submit.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-    e.preventDefault()
     if (isNaN(input_Unidades.value) || input_Unidades.value == "") {
         alert("Indique las unidades")
     } else if (!JSON.parse(localStorage.getItem("MomentoI"))) {
         alert("Indique un momento del día")
-    }
-    else {
-        let fechaComparativaI= new Date(JSON.parse(localStorage.getItem("fechaComparativaI")));
+    } else {
         localStorage.setItem("TextoI", JSON.stringify(texto.value))
         localStorage.setItem("unidades", JSON.stringify(input_Unidades.value))
+
+        // Diferenciar según checkbox
+        let fechaComparativa, fechaString, horaString;
+        if (checkbox_now.checked) {
+            fechaComparativa = new Date(JSON.parse(localStorage.getItem("fechaComparativa")));
+            fechaString = JSON.parse(localStorage.getItem("fecha"));
+            horaString = JSON.parse(localStorage.getItem("hora"));
+        } else {
+            fechaComparativa = new Date(JSON.parse(localStorage.getItem("fechaComparativaI")));
+            fechaString = JSON.parse(localStorage.getItem("fechaI"));
+            horaString = JSON.parse(localStorage.getItem("horaI"));
+        }
+
         let nuevo_registro = {
-            fecha: fechaComparativaI,
-            fechaString: JSON.parse(localStorage.getItem("fechaI")),
-            hora: JSON.parse(localStorage.getItem("horaI")),
+            fecha: fechaComparativa,
+            fechaString: fechaString,
+            hora: horaString,
             unidades: JSON.parse(localStorage.getItem("unidades")),
-            tipo:JSON.parse(localStorage.getItem("TipoInsulina")),
+            tipo: JSON.parse(localStorage.getItem("TipoInsulina")),
             momento: JSON.parse(localStorage.getItem("MomentoI")),
             notas: JSON.parse(localStorage.getItem("TextoI"))
         }
 
         console.log(nuevo_registro)
+
         try {
             let token = localStorage.getItem("token")
             const response = await fetch('https://backend-glucemia.vercel.app/nuevo_registroInsulina', {
@@ -159,29 +171,20 @@ button_submit.addEventListener("submit", async (e) => {
                 console.log('Respuesta del servidor:', result);
                 mostrarToast()
                 setTimeout(() => {
-                    localStorage.removeItem("fecha")
-                    localStorage.removeItem("fechaComparativaI")
-                    localStorage.removeItem("hora")
-                    localStorage.removeItem("unidades")
-                    localStorage.removeItem("TipoInsulina")
-                    
-                    localStorage.removeItem("Momento")
-                    localStorage.removeItem("TextoI")
-                    location.reload()
+                    localStorage.clear();
+                    location.reload();
                 }, 1000)
             } else {
-                    errorToast()
-                    console.error('Error en la solicitud:', response.status, await response.text());
-                }
-        
+                errorToast()
+                console.error('Error en la solicitud:', response.status, await response.text());
+            }
+
         } catch (error) {
             console.error('Error al hacer la solicitud:', error);
         }
-
     }
+});
 
-}
-)
 
 function mostrarToast() {
     var miToast = document.getElementById('miToast');
