@@ -37,6 +37,7 @@ async function showPerfil(datos){
     let val_maximo = document.getElementById("val_max")
     let min = localStorage.getItem('min')
     let max = localStorage.getItem('max')
+    console.log('Esto es max: ' + value(max))
         nombre.innerHTML += `<span><strong> Nombre del Usuario: </strong>${datos.alias} </span>`;
         email.innerHTML += `<span> <strong>Email registrado: </strong> ${datos.email} </span>`;
         val_maximo.innerHTML += `<span> <strong>Valor máximo elegido: </strong> ${max} mg/dL</span>`;
