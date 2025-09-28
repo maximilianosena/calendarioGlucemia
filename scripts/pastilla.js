@@ -222,5 +222,5 @@ function toDateTime(fecha, hora) {
 
 btn_close.addEventListener("click", () => {
     localStorage.clear()
-    location.reload()
+    location.replace('index.html')
 })

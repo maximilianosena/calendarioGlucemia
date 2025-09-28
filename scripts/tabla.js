@@ -29,7 +29,7 @@ let btn_close = document.getElementById("close")
 
 btn_close.addEventListener("click", () => {
     localStorage.clear()
-    location.reload()
+    location.replace('index.html')
 })
 
 
