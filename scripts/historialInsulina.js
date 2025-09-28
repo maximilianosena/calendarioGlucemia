@@ -36,7 +36,12 @@ async function loadPage(page) {
             currentPage = page
             container_registros.innerHTML =""
             view_resultados(data.insulinas)
-} else {
+} else if (data=0){
+     currentPage = page
+     container_registros.innerHTML =""
+} 
+  else
+    {
     alert("Última página")
 }
 }

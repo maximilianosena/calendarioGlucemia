@@ -176,7 +176,12 @@ async function loadPage(page) {
             arrayResultados.push(data.registros)
             container_registros.innerHTML =""
             view_resultados(data.registros)
-} else {
+}
+else if (data=0){
+     currentPage = page
+     container_registros.innerHTML =""
+} 
+else {
     alert("Última página")
 }
 }
