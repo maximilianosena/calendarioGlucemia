@@ -167,7 +167,7 @@ btn_filtro.addEventListener("click", () => {
 
 btn_reset.addEventListener("click", () => {
 
-    view_resultados(valores[0])
+    view_resultados(valores[0][0])
 })
 
 
