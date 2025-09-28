@@ -171,7 +171,17 @@ button_submit.addEventListener("submit", async (e) => {
                 console.log('Respuesta del servidor:', result);
                 mostrarToast()
                 setTimeout(() => {
-                    localStorage.clear();
+                    localStorage.removeItem("fecha")
+                    localStorage.removeItem("fechaComparativa")
+                    localStorage.removeItem("hora")
+                     localStorage.removeItem("fechaI")
+                    localStorage.removeItem("fechaComparativaI")
+                    localStorage.removeItem("horaI")
+                     localStorage.removeItem("MomentoI")
+                    localStorage.removeItem("TextoI")
+                    localStorage.removeItem("mg/dL")
+                    localStorage.removeItem("Momento")
+                    localStorage.removeItem("Texto")
                     location.reload();
                 }, 1000)
             } else {
