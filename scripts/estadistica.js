@@ -15,6 +15,7 @@ async function getValores() {
         if (response.ok) {
             const result = await response.json()
             console.log(result)
+            getPerfil()
             separarMes(result)
 
         }
@@ -41,6 +42,8 @@ async function getPerfil() {
             const result2 = await response.json()
             console.log("Este es perfil " , result2)
             
+            localStorage.setItem('min', result2.min_aceptable)
+            localStorage.setItem('max',result2.max_aceptable)
 
         }
     }
@@ -51,7 +54,7 @@ async function getPerfil() {
 }
 
 getValores()
-getPerfil()
+
 
 function separarMes(variable) {
     let promedio = [
