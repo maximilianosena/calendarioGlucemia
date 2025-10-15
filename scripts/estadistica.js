@@ -24,7 +24,34 @@ async function getValores() {
     }
 
 }
+
+async function getPerfil() {
+    try {
+        let token = localStorage.getItem("token")
+        const user = localStorage.getItem('user')
+        const response = await fetch(`https://backend-glucemia.vercel.app/perfil?email=${user}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+
+
+        if (response.ok) {
+            const result2 = await response.json()
+            console.log("Este es perfil " , result2)
+            
+
+        }
+    }
+    catch (e) {
+        console.error("Error: ", e)
+    }
+
+}
+
 getValores()
+getPerfil()
 
 function separarMes(variable) {
     let promedio = [
